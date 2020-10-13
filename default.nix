@@ -22,4 +22,5 @@ rec {
     lib = mylib; python3Packages = pkgs.python3Packages; stdenv = pkgs.stdenv; };
   pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix { lib = mylib; pyfzf = pyfzf; };
+  i3lock-color = pkgs.callPackage pkgs/applications/window-managers/i3/lock-color.nix { lib = mylib; };
 }
