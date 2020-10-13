@@ -20,4 +20,5 @@ rec {
 
   xkeysnail = pkgs.callPackage pkgs/tools/X11/xkeysnail/default.nix {
     lib = mylib; python3Packages = pkgs.python3Packages; stdenv = pkgs.stdenv; };
+  pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
 }
