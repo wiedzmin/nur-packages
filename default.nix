@@ -18,19 +18,13 @@ rec {
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  xkeysnail = pkgs.callPackage pkgs/tools/X11/xkeysnail/default.nix {
-    lib = mylib; python3Packages = pkgs.python3Packages; stdenv = pkgs.stdenv; };
-  pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
-  pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix { lib = mylib; pyfzf = pyfzf; };
-  i3lock-color = pkgs.callPackage pkgs/applications/window-managers/i3/lock-color.nix { lib = mylib; };
-  redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { lib = mylib; };
-  gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
-    buildGoPackage = pkgs.buildGoPackage;
-    fetchgit = pkgs.fetchgit;
-    lib = mylib;
+  cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
+    bison = pkgs.bison;
+    fetchFromGitHub = pkgs.fetchFromGitHub;
+    flex = pkgs.flex;
+    pkg-config = pkgs.pkg-config;
     stdenv = pkgs.stdenv;
   };
-
   faux = pkgs.callPackage pkgs/development/libraries/faux/default.nix {
     autoreconfHook = pkgs.autoreconfHook;
     fetchgit = pkgs.fetchgit;
@@ -45,14 +39,46 @@ rec {
     pkgconfig = pkgs.pkgconfig;
     stdenv = pkgs.stdenv;
   };
-  cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
-    bison = pkgs.bison;
-    fetchFromGitHub = pkgs.fetchFromGitHub;
-    flex = pkgs.flex;
-    pkg-config = pkgs.pkg-config;
+
+  gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
+    buildGoPackage = pkgs.buildGoPackage;
+    fetchgit = pkgs.fetchgit;
+    lib = mylib;
+    stdenv = pkgs.stdenv;
+  };
+  i3lock-color = pkgs.callPackage pkgs/applications/window-managers/i3/lock-color.nix { lib = mylib; };
+  redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { lib = mylib; };
+  xkeysnail = pkgs.callPackage pkgs/tools/X11/xkeysnail/default.nix {
+    lib = mylib;
+    python3Packages = pkgs.python3Packages;
     stdenv = pkgs.stdenv;
   };
 
+  bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
+    fissix = fissix;
+    lib = mylib;
+    moreorless = moreorless;
+    volatile = volatile;
+  };
+  dephell = pkgs.callPackage pkgs/development/python-modules/dephell/default.nix {
+    bowler = bowler;
+    dephell_archive = dephell_archive;
+    dephell_argparse = dephell_argparse;
+    dephell_changelogs = dephell_changelogs;
+    dephell_discover = dephell_discover;
+    dephell_licenses = dephell_licenses;
+    dephell_links = dephell_links;
+    dephell_markers = dephell_markers;
+    dephell_pythons = dephell_pythons;
+    dephell_setuptools = dephell_setuptools;
+    dephell_shells = dephell_shells;
+    dephell_specifier = dephell_specifier;
+    dephell_venvs = dephell_venvs;
+    dephell_versioning = dephell_versioning;
+    fissix = fissix;
+    lib = mylib;
+    yaspin = yaspin;
+  };
   dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { lib = mylib; };
   dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { lib = mylib; };
   dephell_changelogs = pkgs.callPackage pkgs/development/python-modules/dephell_changelogs/default.nix { lib = mylib; };
@@ -75,41 +101,15 @@ rec {
     lib = mylib;
   };
   dephell_versioning = pkgs.callPackage pkgs/development/python-modules/dephell_versioning/default.nix { lib = mylib; };
-  dephell = pkgs.callPackage pkgs/development/python-modules/dephell/default.nix {
-    bowler = bowler;
-    dephell_archive = dephell_archive;
-    dephell_argparse = dephell_argparse;
-    dephell_changelogs = dephell_changelogs;
-    dephell_discover = dephell_discover;
-    dephell_licenses = dephell_licenses;
-    dephell_links = dephell_links;
-    dephell_markers = dephell_markers;
-    dephell_pythons = dephell_pythons;
-    dephell_setuptools = dephell_setuptools;
-    dephell_shells = dephell_shells;
-    dephell_specifier = dephell_specifier;
-    dephell_venvs = dephell_venvs;
-    dephell_versioning = dephell_versioning;
-    fissix = fissix;
-    lib = mylib;
-    yaspin = yaspin;
-  };
   dict-tools = pkgs.callPackage pkgs/development/python-modules/dict-tools/default.nix {
     fetchFromGitHub = pkgs.fetchFromGitHub;
     python3Packages = pkgs.python3Packages;
     stdenv = pkgs.stdenv;
   };
   fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { lib = mylib; };
+  moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix { lib = mylib; volatile = volatile; };
+  pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
+  pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix { lib = mylib; pyfzf = pyfzf; };
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { lib = mylib; };
-  moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix {
-    lib = mylib;
-    volatile = volatile;
-  };
-  bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
-    fissix = fissix;
-    lib = mylib;
-    moreorless = moreorless;
-    volatile = volatile;
-  };
   yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { lib = mylib; };
 }
