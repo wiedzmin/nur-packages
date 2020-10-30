@@ -36,6 +36,15 @@ rec {
     fetchgit = pkgs.fetchgit;
     stdenv = pkgs.stdenv;
   };
+  qdbm = pkgs.callPackage pkgs/development/libraries/qdbm/default.nix {
+    bison = pkgs.bison;
+    doxygen = pkgs.doxygen;
+    fetchFromGitHub = pkgs.fetchFromGitHub;
+    flex = pkgs.flex;
+    graphviz = pkgs.graphviz;
+    pkgconfig = pkgs.pkgconfig;
+    stdenv = pkgs.stdenv;
+  };
 
   dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { lib = mylib; };
   dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { lib = mylib; };
