@@ -94,6 +94,11 @@ rec {
     lib = mylib;
     yaspin = yaspin;
   };
+  dict-tools = pkgs.callPackage pkgs/development/python-modules/dict-tools/default.nix {
+    fetchFromGitHub = pkgs.fetchFromGitHub;
+    python3Packages = pkgs.python3Packages;
+    stdenv = pkgs.stdenv;
+  };
   fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { lib = mylib; };
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { lib = mylib; };
   moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix {
