@@ -45,6 +45,13 @@ rec {
     pkgconfig = pkgs.pkgconfig;
     stdenv = pkgs.stdenv;
   };
+  cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
+    bison = pkgs.bison;
+    fetchFromGitHub = pkgs.fetchFromGitHub;
+    flex = pkgs.flex;
+    pkg-config = pkgs.pkg-config;
+    stdenv = pkgs.stdenv;
+  };
 
   dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { lib = mylib; };
   dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { lib = mylib; };
