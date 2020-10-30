@@ -31,6 +31,12 @@ rec {
     stdenv = pkgs.stdenv;
   };
 
+  faux = pkgs.callPackage pkgs/development/libraries/faux/default.nix {
+    autoreconfHook = pkgs.autoreconfHook;
+    fetchgit = pkgs.fetchgit;
+    stdenv = pkgs.stdenv;
+  };
+
   dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { lib = mylib; };
   dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { lib = mylib; };
   dephell_changelogs = pkgs.callPackage pkgs/development/python-modules/dephell_changelogs/default.nix { lib = mylib; };
