@@ -24,6 +24,12 @@ rec {
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix { lib = mylib; pyfzf = pyfzf; };
   i3lock-color = pkgs.callPackage pkgs/applications/window-managers/i3/lock-color.nix { lib = mylib; };
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { lib = mylib; };
+  gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
+    buildGoPackage = pkgs.buildGoPackage;
+    fetchgit = pkgs.fetchgit;
+    lib = mylib;
+    stdenv = pkgs.stdenv;
+  };
 
   dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { lib = mylib; };
   dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { lib = mylib; };
