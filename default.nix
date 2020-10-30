@@ -26,11 +26,12 @@ rec {
   fetchgit = pkgs.fetchgit;
   flex = pkgs.flex;
   graphviz = pkgs.graphviz;
+  locale = pkgs.locale;
   pkg-config = pkgs.pkg-config;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
   stdenv = pkgs.stdenv;
-
+  substituteAll = pkgs.substituteAll;
 
   cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
     inherit bison fetchFromGitHub flex pkg-config stdenv;
@@ -50,9 +51,15 @@ rec {
     inherit python3Packages stdenv;
   };
 
+  apply-defaults = pkgs.callPackage pkgs/development/python-modules/apply-defaults/default.nix {
+    inherit python3Packages stdenv;
+  };
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
     lib = mylib;
     inherit fissix moreorless volatile;
+  };
+  click6 = pkgs.callPackage pkgs/development/python-modules/click6/default.nix {
+    inherit locale python3Packages stdenv substituteAll;
   };
   dephell = pkgs.callPackage pkgs/development/python-modules/dephell/default.nix {
     lib = mylib;
@@ -85,10 +92,51 @@ rec {
   dict-tools = pkgs.callPackage pkgs/development/python-modules/dict-tools/default.nix {
     inherit fetchFromGitHub python3Packages stdenv;
   };
+  django-choices = pkgs.callPackage pkgs/development/python-modules/django-choices/default.nix {
+    inherit python3Packages stdenv;
+  };
+  django-debug-toolbar = pkgs.callPackage pkgs/development/python-modules/django-debug-toolbar/default.nix {
+    inherit python3Packages stdenv;
+  };
+  django-epiced = pkgs.callPackage pkgs/development/python-modules/django-epiced/default.nix {
+    inherit python3Packages stdenv;
+  };
+  django-filer = pkgs.callPackage pkgs/development/python-modules/django-filer/default.nix {
+    inherit fetchFromGitHub python3Packages stdenv; # django-js-asset django-mptt
+  };
+  django-js-asset = pkgs.callPackage pkgs/development/python-modules/django-js-asset/default.nix {
+    inherit python3Packages stdenv;
+  };
+  django-modern-rpc = pkgs.callPackage pkgs/development/python-modules/django-modern-rpc/default.nix {
+    inherit python3Packages stdenv;
+  };
+  django-mptt = pkgs.callPackage pkgs/development/python-modules/django-mptt/default.nix {
+    inherit python3Packages stdenv django-js-asset;
+  };
+  django-related-select = pkgs.callPackage pkgs/development/python-modules/django-related-select/default.nix {
+    inherit python3Packages stdenv;
+  };
+  drest = pkgs.callPackage pkgs/development/python-modules/drest/default.nix { inherit python3Packages stdenv; };
   fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { lib = mylib; };
+  json-rpc = pkgs.callPackage pkgs/development/python-modules/json-rpc/default.nix { inherit python3Packages stdenv; };
+  jsonfield = pkgs.callPackage pkgs/development/python-modules/jsonfield/default.nix { inherit python3Packages stdenv; };
+  jsonrpcclient = pkgs.callPackage pkgs/development/python-modules/jsonrpcclient/default.nix {
+    inherit python3Packages stdenv apply-defaults click6;
+  };
   moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix { lib = mylib; volatile = volatile; };
+  python-social-auth = pkgs.callPackage pkgs/development/python-modules/python-social-auth/default.nix {
+    lib = mylib;
+    inherit python3Packages stdenv volatile social-auth-core;
+  };
+
   pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix { lib = mylib; pyfzf = pyfzf; };
+  social-auth-app-django = pkgs.callPackage pkgs/development/python-modules/social-auth-app-django/default.nix {
+    inherit python3Packages stdenv social-auth-core;
+  };
+  social-auth-core = pkgs.callPackage pkgs/development/python-modules/social-auth-app-django/default.nix {
+    inherit python3Packages stdenv;
+  };
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { lib = mylib; };
   yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { lib = mylib; };
 }
