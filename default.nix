@@ -28,6 +28,9 @@ rec {
   fetchurl = pkgs.fetchurl;
   flex = pkgs.flex;
   graphviz = pkgs.graphviz;
+  libX11 = pkgs.xorg.libX11;
+  libXft = pkgs.xorg.libXft;
+  libXinerama = pkgs.xorg.libXinerama;
   locale = pkgs.locale;
   pcre = pkgs.pcre;
   pkg-config = pkgs.pkg-config;
@@ -125,6 +128,13 @@ rec {
   django-related-select = pkgs.callPackage pkgs/development/python-modules/django-related-select/default.nix {
     inherit python3Packages stdenv;
   };
+  dmenu-ng = pkgs.callPackage pkgs/applications/misc/dmenu-ng/default.nix {
+    lib = mylib;
+    inherit stdenv fetchurl libX11 libXinerama libXft zlib;
+  };
+  dmenu-python-ng = pkgs.callPackage pkgs/development/python-modules/dmenu-python-ng/default.nix {
+    inherit python3Packages stdenv dmenu-ng;
+  };
   drest = pkgs.callPackage pkgs/development/python-modules/drest/default.nix { inherit python3Packages stdenv; };
   fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { lib = mylib; };
   json-rpc = pkgs.callPackage pkgs/development/python-modules/json-rpc/default.nix { inherit python3Packages stdenv; };
@@ -139,7 +149,10 @@ rec {
   };
 
   pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
-  pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix { lib = mylib; pyfzf = pyfzf; };
+  pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
+    lib = mylib;
+    inherit dmenu-python-ng pyfzf;
+  };
   social-auth-app-django = pkgs.callPackage pkgs/development/python-modules/social-auth-app-django/default.nix {
     inherit python3Packages stdenv social-auth-core;
   };

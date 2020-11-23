@@ -1,4 +1,4 @@
-{ lib, python3Packages, fetchFromGitHub, pyfzf, stdenv }:
+{ dmenu-python-ng, fetchFromGitHub, lib, pyfzf, python3Packages, stdenv }:
 
 python3Packages.buildPythonPackage rec {
   pname = "pystdlib";
@@ -11,7 +11,7 @@ python3Packages.buildPythonPackage rec {
     sha256 = "0jp8p5pmi72l23fg0974aqgxr8y5fy12ymszhjc814n8qg65ksyb";
   };
 
-  propagatedBuildInputs = with python3Packages; [ dmenu-python libtmux notify2 pyfzf xlib ];
+  propagatedBuildInputs = with python3Packages; [ dmenu-python-ng libtmux notify2 pyfzf xlib ];
 
   doCheck = false;
 

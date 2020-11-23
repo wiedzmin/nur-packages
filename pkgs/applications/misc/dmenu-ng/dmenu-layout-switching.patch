@@ -1,0 +1,107 @@
+From b0ebb146d09fe402a5efa204905394b5677b6676 Mon Sep 17 00:00:00 2001
+From: Alex Ermolov <aaermolov@gmail.com>
+Date: Wed, 18 Nov 2020 23:24:40 +0300
+Subject: [PATCH] added layouts switching
+
+---
+ dmenu.c | 56 ++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 54 insertions(+), 2 deletions(-)
+
+diff --git a/dmenu.c b/dmenu.c
+index 65f25ce..ab81519 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -9,6 +9,7 @@
+ #include <unistd.h>
+ 
+ #include <X11/Xlib.h>
++#include <X11/XKBlib.h>
+ #include <X11/Xatom.h>
+ #include <X11/Xutil.h>
+ #ifdef XINERAMA
+@@ -53,6 +54,9 @@ static XIC xic;
+ static Drw *drw;
+ static Clr *scheme[SchemeLast];
+ 
++static unsigned char group_count;
++static unsigned char current_group;
++
+ #include "config.h"
+ 
+ static int (*fstrncmp)(const char *, const char *, size_t) = strncmp;
+@@ -126,6 +130,49 @@ drawitem(struct item *item, int x, int y, int w)
+ 	return drw_text(drw, x, y, w, bh, lrpad / 2, item->text, 0);
+ }
+ 
++
++static void
++get_layouts_count(void)
++{
++	XkbDescRec *desc = XkbAllocKeyboard();
++	XkbGetControls(dpy, XkbAllControlsMask, desc);
++	XkbGetNames(dpy, XkbSymbolsNameMask | XkbGroupNamesMask, desc);
++	int i;
++	Atom *group_source = desc->names->groups;
++	for ( i=0; i < XkbNumKbdGroups; i++ )
++	{
++		if ( group_source[i] != None )
++		{
++			group_count = i+1;
++		}
++	}
++	XkbFreeKeyboard(desc, 0, 1);
++}
++
++static void
++get_current_layout(void)
++{
++	XkbStateRec state;
++	if ( XkbGetState(dpy, XkbUseCoreKbd, &state) == Success )
++	{
++		current_group = state.locked_group;
++	}
++}
++
++static void
++toggle_window_layout(void)
++{
++	int new_group = current_group + 1;
++	int result = 0;
++	if ( new_group >= group_count )
++		new_group = 0;
++	result = XkbLockGroup(dpy, XkbUseCoreKbd, new_group);
++	if (result) {
++		current_group = new_group;
++	}
++}
++
++
+ static void
+ drawmenu(void)
+ {
+@@ -325,8 +372,11 @@ keypress(XKeyEvent *ev)
+ 
+ 	if (ev->state & ControlMask) {
+ 		switch(ksym) {
+-		case XK_a: ksym = XK_Home;      break;
+-		case XK_b: ksym = XK_Left;      break;
++		case XK_backslash:
++			toggle_window_layout();
++			break;
++		case XK_a: ksym = XK_Home;		break;
++		case XK_b: ksym = XK_Left;		break;
+ 		case XK_c: ksym = XK_Escape;    break;
+ 		case XK_d: ksym = XK_Delete;    break;
+ 		case XK_e: ksym = XK_End;       break;
+@@ -764,6 +814,8 @@ main(int argc, char *argv[])
+ 		readstdin();
+ 		grabkeyboard();
+ 	}
++	get_layouts_count();
++    get_current_layout();
+ 	setup();
+ 	run();
+ 
+-- 
+2.29.0
+
