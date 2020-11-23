@@ -18,20 +18,25 @@ rec {
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
+  autoPatchelfHook = pkgs.autoPatchelfHook;
   autoreconfHook = pkgs.autoreconfHook;
   bison = pkgs.bison;
   buildGoPackage = pkgs.buildGoPackage;
   doxygen = pkgs.doxygen;
   fetchFromGitHub = pkgs.fetchFromGitHub;
   fetchgit = pkgs.fetchgit;
+  fetchurl = pkgs.fetchurl;
   flex = pkgs.flex;
   graphviz = pkgs.graphviz;
   locale = pkgs.locale;
+  pcre = pkgs.pcre;
   pkg-config = pkgs.pkg-config;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
+  sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
   substituteAll = pkgs.substituteAll;
+  zlib = pkgs.zlib;
 
   cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
     inherit bison fetchFromGitHub flex pkg-config stdenv;
@@ -60,6 +65,10 @@ rec {
   };
   click6 = pkgs.callPackage pkgs/development/python-modules/click6/default.nix {
     inherit locale python3Packages stdenv substituteAll;
+  };
+  comby = pkgs.callPackage pkgs/development/tools/comby/default.nix {
+    lib = mylib;
+    inherit autoPatchelfHook fetchurl pcre pkgconfig sqlite stdenv zlib;
   };
   dephell = pkgs.callPackage pkgs/development/python-modules/dephell/default.nix {
     lib = mylib;
