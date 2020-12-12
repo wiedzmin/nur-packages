@@ -7,8 +7,8 @@ python3Packages.buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "pystdlib";
-    rev = "6834591004366084b7af9b967b3d92a29921aa4d";
-    sha256 = "07q53zr249l1d23qpgankq5dn3yr2v896svjhc33jsh1rp2g6j93";
+    rev = "0f6a53190d7602b1488f16a2466ba20daf242674";
+    sha256 = "13j170pjwmaxfvmpxbgb4xbsxf1l114s8mvarha0s0gr14mm6dvs";
   };
 
   propagatedBuildInputs = with python3Packages; [ dmenu-python-ng libtmux notify2 pyfzf pygit2 xlib ];
