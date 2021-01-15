@@ -52,6 +52,9 @@ rec {
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
     inherit buildGoPackage fetchgit lib stdenv;
   };
+  goimports-reviser = pkgs.callPackage pkgs/development/tools/goimports-reviser/default.nix {
+    inherit buildGoPackage fetchgit stdenv;
+  };
   i3lock-color = pkgs.callPackage pkgs/applications/window-managers/i3/lock-color.nix { lib = mylib; };
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { lib = mylib; };
   xkeysnail = pkgs.callPackage pkgs/tools/X11/xkeysnail/default.nix {
