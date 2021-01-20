@@ -164,4 +164,6 @@ rec {
   };
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { lib = mylib; };
   yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { lib = mylib; };
+
+  firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
 }
