@@ -164,6 +164,11 @@ rec {
   };
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { lib = mylib; };
   yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { lib = mylib; };
+  my_cookies = pkgs.callPackage pkgs/development/python-modules/my_cookies/default.nix {
+    openssl = pkgs.openssl;
+    browser-cookie3 = python3Packages.browser-cookie3;
+    inherit python3Packages stdenv;
+  };
 
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
 }
