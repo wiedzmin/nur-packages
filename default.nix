@@ -36,6 +36,7 @@ rec {
   pkg-config = pkgs.pkg-config;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
+  rustPlatform = pkgs.rustPlatform;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
   substituteAll = pkgs.substituteAll;
@@ -63,6 +64,10 @@ rec {
   xkeysnail = pkgs.callPackage pkgs/tools/X11/xkeysnail/default.nix {
     lib = mylib;
     inherit python3Packages stdenv;
+  };
+  thumbs = pkgs.callPackage pkgs/applications/misc/thumbs/default.nix {
+    lib = mylib;
+    inherit rustPlatform fetchFromGitHub;
   };
 
   apply-defaults = pkgs.callPackage pkgs/development/python-modules/apply-defaults/default.nix {
