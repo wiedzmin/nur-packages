@@ -21,25 +21,30 @@ rec {
   autoPatchelfHook = pkgs.autoPatchelfHook;
   autoreconfHook = pkgs.autoreconfHook;
   bison = pkgs.bison;
+  buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
   doxygen = pkgs.doxygen;
   fetchFromGitHub = pkgs.fetchFromGitHub;
   fetchgit = pkgs.fetchgit;
   fetchurl = pkgs.fetchurl;
   flex = pkgs.flex;
+  git = pkgs.git;
   graphviz = pkgs.graphviz;
   libX11 = pkgs.xorg.libX11;
   libXft = pkgs.xorg.libXft;
   libXinerama = pkgs.xorg.libXinerama;
   locale = pkgs.locale;
+  networkmanager = pkgs.networkmanager;
   pcre = pkgs.pcre;
   pkg-config = pkgs.pkg-config;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
+  rofi = pkgs.rofi;
   rustPlatform = pkgs.rustPlatform;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
   substituteAll = pkgs.substituteAll;
+  xsel = pkgs.xsel;
   zlib = pkgs.zlib;
 
   cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
@@ -68,6 +73,10 @@ rec {
   thumbs = pkgs.callPackage pkgs/applications/misc/thumbs/default.nix {
     lib = mylib;
     inherit rustPlatform fetchFromGitHub;
+  };
+  toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
+    lib = mylib;
+    inherit buildGoModule fetchFromGitHub git networkmanager xsel;
   };
 
   apply-defaults = pkgs.callPackage pkgs/development/python-modules/apply-defaults/default.nix {
