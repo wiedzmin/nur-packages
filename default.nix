@@ -34,6 +34,7 @@ rec {
   libXft = pkgs.xorg.libXft;
   libXinerama = pkgs.xorg.libXinerama;
   locale = pkgs.locale;
+  makeWrapper = pkgs.makeWrapper;
   networkmanager = pkgs.networkmanager;
   pcre = pkgs.pcre;
   pkg-config = pkgs.pkg-config;
@@ -76,7 +77,7 @@ rec {
   };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
     lib = mylib;
-    inherit buildGoModule fetchFromGitHub git networkmanager xsel;
+    inherit buildGoModule dmenu-ng fetchFromGitHub git makeWrapper networkmanager xsel;
   };
 
   apply-defaults = pkgs.callPackage pkgs/development/python-modules/apply-defaults/default.nix {

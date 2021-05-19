@@ -1,7 +1,9 @@
 { lib
 , buildGoModule
+, dmenu-ng
 , fetchFromGitHub
 , git
+, makeWrapper
 , networkmanager
 , xsel
 }:
@@ -12,14 +14,18 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "5b5e31621f42bbe5961b459a9ed2379c1c26d026";
-    sha256 = "07bp8q63q9hjf8pbbsykblf3vxr2plr8a3bsp12nr8s9cssfc80s";
+    rev = "8677bfd17746be3bbdd1f782e09029d14d328242";
+    sha256 = "0kg90bbcxqd9pzqy8qf3w83xzxqym8w0fkdym8n0ikn4l8iq79m1";
   };
 
   vendorSha256 = "+n1vapvcbyRVXQRMk7fGE7fSPZmmI9ubqhSIlOxbez0=";
 
-  buildInputs = [ git networkmanager xsel ];
-  # checkInputs = [ git networkmanager xsel ];
+  nativeBuildInputs = [ makeWrapper ];
+
+  postInstall = ''
+    wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ xsel ]}
+    wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
+  '';
 
   meta = with lib; {
     description = "Handy scripts from my NixOS configuration, rewritten on Go";
