@@ -14,17 +14,19 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "8677bfd17746be3bbdd1f782e09029d14d328242";
-    sha256 = "0kg90bbcxqd9pzqy8qf3w83xzxqym8w0fkdym8n0ikn4l8iq79m1";
+    rev = "0f5770255de4df19cba476875eb568a2e4205d6e";
+    sha256 = "15vakb9y05nz53lk35g46qfwl5i6962qc97skzkvlcv1890xn7dr";
   };
 
-  vendorSha256 = "+n1vapvcbyRVXQRMk7fGE7fSPZmmI9ubqhSIlOxbez0=";
+  vendorSha256 = "rj2FcczxI+v+UDEywXcz5H3D8hWAW7zCMTv4KCSL154=";
+  # vendorSha256 = lib.fakeSha256; # because of active development
 
   nativeBuildInputs = [ makeWrapper ];
 
   postInstall = ''
     wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ xsel ]}
     wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
+    wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
   '';
 
   meta = with lib; {
