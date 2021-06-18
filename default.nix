@@ -10,11 +10,10 @@
 
 let
   maintainers = pkgs.lib.maintainers // import ./maintainers.nix;
-  mylib = pkgs.lib // { maintainers = maintainers; };
 in
 rec {
   # The `lib`, `modules`, and `overlay` names are special
-  lib = import ./lib { inherit pkgs; }; # functions
+  lib = (import ./lib { inherit pkgs; }) // { maintainers = maintainers; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
@@ -28,6 +27,7 @@ rec {
   libX11 = pkgs.xorg.libX11;
   libXft = pkgs.xorg.libXft;
   libXinerama = pkgs.xorg.libXinerama;
+  makeBinPath = pkgs.lib.makeBinPath;
   makeWrapper = pkgs.makeWrapper;
   networkmanager = pkgs.networkmanager;
   pcre = pkgs.pcre;
@@ -47,65 +47,57 @@ rec {
   go-mod-outdated = pkgs.callPackage pkgs/development/tools/go-mod-outdated/default.nix {
     inherit buildGoPackage fetchgit stdenv;
   };
-  redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { lib = mylib; };
+  redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
-    lib = mylib;
-    inherit buildGoModule dmenu-ng fetchFromGitHub git makeWrapper networkmanager xsel;
+    inherit buildGoModule dmenu-ng fetchFromGitHub git lib makeBinPath makeWrapper networkmanager stdenv xsel;
   };
 
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
-    lib = mylib;
-    inherit fissix moreorless volatile;
+    inherit fissix lib moreorless volatile;
   };
   comby = pkgs.callPackage pkgs/development/tools/comby/default.nix {
-    lib = mylib;
-    inherit autoPatchelfHook fetchurl pcre pkgconfig sqlite stdenv zlib;
+    inherit autoPatchelfHook fetchurl lib pcre pkgconfig sqlite stdenv zlib;
   };
   dephell = pkgs.callPackage pkgs/development/python-modules/dephell/default.nix {
-    lib = mylib;
+    inherit lib;
     inherit bowler dephell_archive dephell_argparse dephell_changelogs dephell_discover;
     inherit dephell_licenses dephell_links dephell_markers dephell_pythons dephell_setuptools;
     inherit dephell_shells dephell_specifier dephell_venvs dephell_versioning fissix yaspin;
   };
-  dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { lib = mylib; };
-  dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { lib = mylib; };
-  dephell_changelogs = pkgs.callPackage pkgs/development/python-modules/dephell_changelogs/default.nix { lib = mylib; };
-  dephell_discover = pkgs.callPackage pkgs/development/python-modules/dephell_discover/default.nix { lib = mylib; };
-  dephell_licenses = pkgs.callPackage pkgs/development/python-modules/dephell_licenses/default.nix { lib = mylib; };
-  dephell_links = pkgs.callPackage pkgs/development/python-modules/dephell_links/default.nix { lib = mylib; };
+  dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { inherit lib; };
+  dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { inherit lib; };
+  dephell_changelogs = pkgs.callPackage pkgs/development/python-modules/dephell_changelogs/default.nix { inherit lib; };
+  dephell_discover = pkgs.callPackage pkgs/development/python-modules/dephell_discover/default.nix { inherit lib; };
+  dephell_licenses = pkgs.callPackage pkgs/development/python-modules/dephell_licenses/default.nix { inherit lib; };
+  dephell_links = pkgs.callPackage pkgs/development/python-modules/dephell_links/default.nix { inherit lib; };
   dephell_markers = pkgs.callPackage pkgs/development/python-modules/dephell_markers/default.nix {
-    lib = mylib;
-    inherit dephell_specifier;
+    inherit dephell_specifier lib;
   };
   dephell_pythons = pkgs.callPackage pkgs/development/python-modules/dephell_pythons/default.nix {
-    lib = mylib;
-    inherit dephell_specifier;
+    inherit dephell_specifier lib;
   };
-  dephell_setuptools = pkgs.callPackage pkgs/development/python-modules/dephell_setuptools/default.nix { lib = mylib; };
-  dephell_shells = pkgs.callPackage pkgs/development/python-modules/dephell_shells/default.nix { lib = mylib; };
-  dephell_specifier = pkgs.callPackage pkgs/development/python-modules/dephell_specifier/default.nix { lib = mylib; };
+  dephell_setuptools = pkgs.callPackage pkgs/development/python-modules/dephell_setuptools/default.nix { inherit lib; };
+  dephell_shells = pkgs.callPackage pkgs/development/python-modules/dephell_shells/default.nix { inherit lib; };
+  dephell_specifier = pkgs.callPackage pkgs/development/python-modules/dephell_specifier/default.nix { inherit lib; };
   dephell_venvs = pkgs.callPackage pkgs/development/python-modules/dephell_venvs/default.nix {
-    lib = mylib;
-    inherit dephell_pythons;
+    inherit dephell_pythons lib;
   };
-  dephell_versioning = pkgs.callPackage pkgs/development/python-modules/dephell_versioning/default.nix { lib = mylib; };
+  dephell_versioning = pkgs.callPackage pkgs/development/python-modules/dephell_versioning/default.nix { inherit lib; };
   dmenu-ng = pkgs.callPackage pkgs/applications/misc/dmenu-ng/default.nix {
-    lib = mylib;
-    inherit stdenv fetchurl libX11 libXinerama libXft zlib;
+    inherit fetchurl lib libX11 libXft libXinerama stdenv zlib;
   };
   dmenu-python-ng = pkgs.callPackage pkgs/development/python-modules/dmenu-python-ng/default.nix {
     inherit python3Packages stdenv dmenu-ng;
   };
-  fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { lib = mylib; };
-  moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix { lib = mylib; volatile = volatile; };
+  fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { inherit lib; };
+  moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix { inherit lib; volatile = volatile; };
 
-  pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
+  pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { inherit lib; };
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
-    lib = mylib;
-    inherit dmenu-python-ng pyfzf;
+    inherit dmenu-python-ng lib pyfzf;
   };
-  volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { lib = mylib; };
-  yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { lib = mylib; };
+  volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { inherit lib; };
+  yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { inherit lib; };
   my_cookies = pkgs.callPackage pkgs/development/python-modules/my_cookies/default.nix {
     openssl = pkgs.openssl;
     browser-cookie3 = python3Packages.browser-cookie3;
