@@ -1,4 +1,4 @@
-{ lib, python3Packages, stdenv }:
+{ lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "yaspin";
@@ -11,10 +11,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A lightweight terminal spinner for Python with safe pipes and redirects";
     homepage = "https://github.com/pavdmyt/yaspin";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

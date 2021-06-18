@@ -1,4 +1,4 @@
-{ dephell_specifier, lib, python3Packages, stdenv }:
+{ dephell_specifier, lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "dephell_markers";
@@ -13,10 +13,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Work with environment markers (PEP-496).";
     homepage = "https://github.com/dephell/dephell_markers";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

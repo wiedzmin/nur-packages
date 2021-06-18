@@ -1,4 +1,4 @@
-{ python3Packages, dmenu-ng, lib, stdenv }:
+{ dmenu-ng, lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "dmenu-python-ng";
@@ -15,10 +15,10 @@ python3Packages.buildPythonPackage rec {
   # No tests existing
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A Python wrapper for dmenu";
     homepage = "https://dmenu.readthedocs.io";
     license = licenses.mit;
-    maintainers = with lib.maintainers; [ wiedzmin ];
+    maintainers = with maintainers; [ wiedzmin ];
   };
 }

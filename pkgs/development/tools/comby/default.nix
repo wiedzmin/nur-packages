@@ -33,7 +33,7 @@ stdenv.mkDerivation rec {
     #echo INSTALLING DONE.
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A tool for changing code across many languages";
     homepage = "https://comby.dev/";
     license = licenses.asl20;

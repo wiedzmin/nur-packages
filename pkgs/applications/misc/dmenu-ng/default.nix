@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, libX11, libXinerama, libXft, zlib, patches ? [ ./xim.patch ./dmenu-layout-switching.patch ] }:
+{ fetchurl, lib, libX11, libXft, libXinerama, patches ? [ ./xim.patch ./dmenu-layout-switching.patch ], stdenv, zlib }:
 
 stdenv.mkDerivation rec {
   name = "dmenu-ng-4.9";
@@ -23,11 +23,11 @@ stdenv.mkDerivation rec {
 
   makeFlags = [ "CC:=$(CC)" ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
       description = "A generic, highly customizable, and efficient menu for the X Window System";
       homepage = "https://tools.suckless.org/dmenu";
       license = licenses.mit;
-      maintainers = with lib.maintainers; [ wiedzmin ];
+      maintainers = with maintainers; [ wiedzmin ];
       platforms = platforms.all;
   };
 }

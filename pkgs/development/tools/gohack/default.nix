@@ -1,4 +1,4 @@
-{ lib, stdenv, buildGoPackage, fetchgit }:
+{ buildGoPackage, fetchgit, lib }:
 
 buildGoPackage rec {
   name = "gohack-unstable-${version}";
@@ -15,7 +15,11 @@ buildGoPackage rec {
 
   goDeps = ./deps.nix;
 
-  # TODO: add metadata https://nixos.org/nixpkgs/manual/#sec-standard-meta-attributes
-  meta = {
+  meta = with lib; {
+    description = "Make temporary edits to your Go module dependencies";
+    homepage = "https://github.com/rogpeppe/gohack";
+    license = licenses.bsd3;
+    platforms = platforms.unix;
+    maintainers = with maintainers; [ wiedzmin ];
   };
 }

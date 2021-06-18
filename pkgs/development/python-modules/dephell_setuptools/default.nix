@@ -1,4 +1,4 @@
-{ lib, python3Packages, stdenv }:
+{ lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "dephell_setuptools";
@@ -11,10 +11,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Custom setuptools version";
     homepage = "https://github.com/dephell/dephell_setuptools";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

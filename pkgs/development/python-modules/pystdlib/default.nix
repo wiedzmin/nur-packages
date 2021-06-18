@@ -1,4 +1,4 @@
-{ dmenu-python-ng, fetchFromGitHub, lib, pyfzf, python3Packages, stdenv }:
+{ dmenu-python-ng, fetchFromGitHub, lib, pyfzf, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "pystdlib";
@@ -15,10 +15,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Opinionated python utilities collection";
     homepage = "https://github.com/wiedzmin/pystdlib";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

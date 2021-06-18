@@ -1,4 +1,4 @@
-{ lib, python3Packages, fzf, stdenv }:
+{ fzf, lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "pyfzf";
@@ -13,10 +13,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A python wrapper for fzf";
     homepage = "https://github.com/nk412/pyfzf";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

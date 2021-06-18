@@ -1,4 +1,4 @@
-{ lib, python3Packages, stdenv }:
+{ lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "volatile";
@@ -11,10 +11,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A small extension for the tempfile module.";
     homepage = "https://github.com/mbr/volatile";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

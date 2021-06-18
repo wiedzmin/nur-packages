@@ -1,4 +1,4 @@
-{ lib, stdenv, buildGoPackage, fetchgit }:
+{ buildGoPackage, fetchgit, lib }:
 
 buildGoPackage rec {
   name = "redis-tui-unstable-${version}";
@@ -15,11 +15,11 @@ buildGoPackage rec {
 
   goDeps = ./deps.nix;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A Redis Text-based UI client in CLI";
     homepage = "https://github.com/mylxsw/redis-tui";
     license = with licenses; [ gpl2 ];
     platforms = [ "x86_64-linux" ];
-    maintainers = with lib.maintainers; [ wiedzmin ];
+    maintainers = with maintainers; [ wiedzmin ];
   };
 }

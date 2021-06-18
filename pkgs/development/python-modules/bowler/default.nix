@@ -1,4 +1,4 @@
-{ fissix, moreorless, volatile, lib, python3Packages, stdenv }:
+{ fissix, lib, moreorless, python3Packages, volatile }:
 
 python3Packages.buildPythonPackage rec {
   pname = "bowler";
@@ -25,10 +25,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Safe code refactoring for modern Python.";
     homepage = "https://github.com/facebookincubator/Bowler";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

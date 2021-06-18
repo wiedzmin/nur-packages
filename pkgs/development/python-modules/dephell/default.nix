@@ -1,9 +1,7 @@
-{ dephell_archive, dephell_argparse, dephell_changelogs,
-  dephell_discover, dephell_licenses, dephell_links,
-  dephell_markers, dephell_pythons, dephell_setuptools,
-  dephell_shells, dephell_specifier, dephell_venvs,
-  dephell_versioning, yaspin, bowler, fissix,
-  lib, python3Packages, stdenv }:
+{ bowler, dephell_archive, dephell_argparse, dephell_changelogs, dephell_discover,
+  dephell_licenses, dephell_links, dephell_markers, dephell_pythons, dephell_setuptools,
+  dephell_shells, dephell_specifier, dephell_venvs, dephell_versioning, fissix, lib,
+  python3Packages, yaspin }:
 
 python3Packages.buildPythonPackage rec {
   pname = "dephell";
@@ -51,7 +49,7 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = ''
       Python project management. Manage packages: convert between formats,
       lock, install, resolve, isolate, test, build graph, show outdated, audit.
@@ -59,6 +57,6 @@ python3Packages.buildPythonPackage rec {
     '';
     homepage = "https://github.com/dephell/dephell";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

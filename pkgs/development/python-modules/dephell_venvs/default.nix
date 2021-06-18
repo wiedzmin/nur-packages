@@ -1,4 +1,4 @@
-{ dephell_pythons, lib, python3Packages, stdenv }:
+{ dephell_pythons, lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "dephell_venvs";
@@ -13,10 +13,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Manage virtual environments";
     homepage = "https://github.com/dephell/dephell_venvs";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

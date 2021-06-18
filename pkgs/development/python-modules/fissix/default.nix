@@ -1,4 +1,4 @@
-{ lib, python3Packages, stdenv }:
+{ lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "fissix";
@@ -13,10 +13,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "backport of lib2to3, with enhancements";
     homepage = "https://github.com/jreese/fissix";
     license = licenses.psfl;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

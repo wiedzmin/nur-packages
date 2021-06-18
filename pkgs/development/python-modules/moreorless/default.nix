@@ -1,4 +1,4 @@
-{ volatile, lib, python3Packages, stdenv }:
+{ volatile, lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "moreorless";
@@ -19,10 +19,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Wrapper to make difflib.unified_diff more fun to use";
     homepage = "https://github.com/thatch/moreorless/";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }

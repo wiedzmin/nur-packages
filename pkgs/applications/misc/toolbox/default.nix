@@ -1,4 +1,5 @@
-{ buildGoModule, dmenu-ng, fetchFromGitHub, git, lib, makeBinPath, makeWrapper, networkmanager, stdenv, xsel }:
+{ buildGoModule, dmenu-ng, fetchFromGitHub, git, lib, makeWrapper, networkmanager, xsel }:
+
 buildGoModule {
   pname = "toolbox";
   version = "unstable";
@@ -16,16 +17,16 @@ buildGoModule {
   nativeBuildInputs = [ makeWrapper ];
 
   postInstall = ''
-    wrapProgram $out/bin/webjumps --prefix PATH : ${makeBinPath [ xsel ]}
-    wrapProgram $out/bin/websearch --prefix PATH : ${makeBinPath [ dmenu-ng xsel ]}
-    wrapProgram $out/bin/links --prefix PATH : ${makeBinPath [ dmenu-ng xsel ]}
+    wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ xsel ]}
+    wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
+    wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Handy scripts from my NixOS configuration, rewritten on Go";
     homepage = "https://github.com/wiedzmin/toolbox";
     license = licenses.mit;
-    maintainers = with lib.maintainers; [ wiedzmin ];
+    maintainers = with maintainers; [ wiedzmin ];
     platforms = platforms.all;
   };
 }

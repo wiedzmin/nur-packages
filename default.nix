@@ -13,7 +13,7 @@ let
 in
 rec {
   # The `lib`, `modules`, and `overlay` names are special
-  lib = (import ./lib { inherit pkgs; }) // { maintainers = maintainers; }; # functions
+  lib = pkgs.lib // { maintainers = maintainers; }; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
@@ -30,6 +30,7 @@ rec {
   makeBinPath = pkgs.lib.makeBinPath;
   makeWrapper = pkgs.makeWrapper;
   networkmanager = pkgs.networkmanager;
+  openssl = pkgs.openssl;
   pcre = pkgs.pcre;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
@@ -39,30 +40,32 @@ rec {
   zlib = pkgs.zlib;
 
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
-    inherit buildGoPackage fetchgit lib stdenv;
+    inherit buildGoPackage fetchgit lib;
   };
   goimports-reviser = pkgs.callPackage pkgs/development/tools/goimports-reviser/default.nix {
-    inherit buildGoPackage fetchgit stdenv;
+    inherit buildGoPackage fetchgit lib;
   };
   go-mod-outdated = pkgs.callPackage pkgs/development/tools/go-mod-outdated/default.nix {
-    inherit buildGoPackage fetchgit stdenv;
-  };
-  redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
-  toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
-    inherit buildGoModule dmenu-ng fetchFromGitHub git lib makeBinPath makeWrapper networkmanager stdenv xsel;
+    inherit buildGoPackage fetchgit lib; # FIXME: do we need anything except `lib` here?
   };
 
-  bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
-    inherit fissix lib moreorless volatile;
-  };
   comby = pkgs.callPackage pkgs/development/tools/comby/default.nix {
     inherit autoPatchelfHook fetchurl lib pcre pkgconfig sqlite stdenv zlib;
   };
+  redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
+
+  toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
+    inherit buildGoModule dmenu-ng fetchFromGitHub git lib makeWrapper networkmanager xsel;
+  };
+
+  bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
+    inherit fissix lib moreorless python3Packages volatile;
+  };
   dephell = pkgs.callPackage pkgs/development/python-modules/dephell/default.nix {
-    inherit lib;
-    inherit bowler dephell_archive dephell_argparse dephell_changelogs dephell_discover;
-    inherit dephell_licenses dephell_links dephell_markers dephell_pythons dephell_setuptools;
-    inherit dephell_shells dephell_specifier dephell_venvs dephell_versioning fissix yaspin;
+    inherit bowler fissix lib yaspin;
+    inherit dephell_archive dephell_argparse dephell_changelogs dephell_discover;
+    inherit dephell_licenses dephell_links dephell_markers dephell_pythons;
+    inherit dephell_setuptools dephell_shells dephell_specifier dephell_venvs dephell_versioning;
   };
   dephell_archive = pkgs.callPackage pkgs/development/python-modules/dephell_archive/default.nix { inherit lib; };
   dephell_argparse = pkgs.callPackage pkgs/development/python-modules/dephell_argparse/default.nix { inherit lib; };
@@ -87,10 +90,13 @@ rec {
     inherit fetchurl lib libX11 libXft libXinerama stdenv zlib;
   };
   dmenu-python-ng = pkgs.callPackage pkgs/development/python-modules/dmenu-python-ng/default.nix {
-    inherit python3Packages stdenv dmenu-ng;
+    inherit dmenu-ng lib python3Packages;
   };
   fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { inherit lib; };
-  moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix { inherit lib; volatile = volatile; };
+  moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix {
+    inherit lib;
+    volatile = volatile;
+  };
 
   pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { inherit lib; };
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
@@ -99,10 +105,8 @@ rec {
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { inherit lib; };
   yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { inherit lib; };
   my_cookies = pkgs.callPackage pkgs/development/python-modules/my_cookies/default.nix {
-    openssl = pkgs.openssl;
-    browser-cookie3 = python3Packages.browser-cookie3;
-    inherit python3Packages stdenv;
+    inherit lib openssl python3Packages;
   };
 
-  firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { });
+  firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { inherit lib; });
 }

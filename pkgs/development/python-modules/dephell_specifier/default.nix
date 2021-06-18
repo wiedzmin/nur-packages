@@ -1,4 +1,4 @@
-{ lib, python3Packages, stdenv }:
+{ lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "dephell_specifier";
@@ -13,10 +13,10 @@ python3Packages.buildPythonPackage rec {
 
   doCheck = false;
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Work with version specifiers (can parse PEP-440, SemVer, Ruby, NPM, Maven)";
     homepage = "https://github.com/dephell/dephell_specifier";
     license = licenses.mit;
-    maintainer = with lib.maintainers; [ wiedzmin ];
+    maintainer = with maintainers; [ wiedzmin ];
   };
 }
