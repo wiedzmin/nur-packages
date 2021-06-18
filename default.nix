@@ -19,42 +19,24 @@ rec {
   overlays = import ./overlays; # nixpkgs overlays
 
   autoPatchelfHook = pkgs.autoPatchelfHook;
-  autoreconfHook = pkgs.autoreconfHook;
-  bison = pkgs.bison;
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
-  doxygen = pkgs.doxygen;
   fetchFromGitHub = pkgs.fetchFromGitHub;
   fetchgit = pkgs.fetchgit;
   fetchurl = pkgs.fetchurl;
-  flex = pkgs.flex;
   git = pkgs.git;
-  graphviz = pkgs.graphviz;
   libX11 = pkgs.xorg.libX11;
   libXft = pkgs.xorg.libXft;
   libXinerama = pkgs.xorg.libXinerama;
-  locale = pkgs.locale;
   makeWrapper = pkgs.makeWrapper;
   networkmanager = pkgs.networkmanager;
   pcre = pkgs.pcre;
-  pkg-config = pkgs.pkg-config;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
-  rofi = pkgs.rofi;
-  rustPlatform = pkgs.rustPlatform;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
-  substituteAll = pkgs.substituteAll;
   xsel = pkgs.xsel;
   zlib = pkgs.zlib;
-
-  cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
-    inherit bison fetchFromGitHub flex pkg-config stdenv;
-  };
-  faux = pkgs.callPackage pkgs/development/libraries/faux/default.nix { inherit autoreconfHook fetchgit stdenv; };
-  qdbm = pkgs.callPackage pkgs/development/libraries/qdbm/default.nix {
-    inherit bison doxygen fetchFromGitHub flex graphviz pkgconfig stdenv;
-  };
 
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
     inherit buildGoPackage fetchgit lib stdenv;
@@ -65,30 +47,15 @@ rec {
   go-mod-outdated = pkgs.callPackage pkgs/development/tools/go-mod-outdated/default.nix {
     inherit buildGoPackage fetchgit stdenv;
   };
-  i3lock-color = pkgs.callPackage pkgs/applications/window-managers/i3/lock-color.nix { lib = mylib; };
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { lib = mylib; };
-  xkeysnail = pkgs.callPackage pkgs/tools/X11/xkeysnail/default.nix {
-    lib = mylib;
-    inherit python3Packages stdenv;
-  };
-  thumbs = pkgs.callPackage pkgs/applications/misc/thumbs/default.nix {
-    lib = mylib;
-    inherit rustPlatform fetchFromGitHub;
-  };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
     lib = mylib;
     inherit buildGoModule dmenu-ng fetchFromGitHub git makeWrapper networkmanager xsel;
   };
 
-  apply-defaults = pkgs.callPackage pkgs/development/python-modules/apply-defaults/default.nix {
-    inherit python3Packages stdenv;
-  };
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
     lib = mylib;
     inherit fissix moreorless volatile;
-  };
-  click6 = pkgs.callPackage pkgs/development/python-modules/click6/default.nix {
-    inherit locale python3Packages stdenv substituteAll;
   };
   comby = pkgs.callPackage pkgs/development/tools/comby/default.nix {
     lib = mylib;
@@ -122,33 +89,6 @@ rec {
     inherit dephell_pythons;
   };
   dephell_versioning = pkgs.callPackage pkgs/development/python-modules/dephell_versioning/default.nix { lib = mylib; };
-  dict-tools = pkgs.callPackage pkgs/development/python-modules/dict-tools/default.nix {
-    inherit fetchFromGitHub python3Packages stdenv;
-  };
-  django-choices = pkgs.callPackage pkgs/development/python-modules/django-choices/default.nix {
-    inherit python3Packages stdenv;
-  };
-  django-debug-toolbar = pkgs.callPackage pkgs/development/python-modules/django-debug-toolbar/default.nix {
-    inherit python3Packages stdenv;
-  };
-  django-epiced = pkgs.callPackage pkgs/development/python-modules/django-epiced/default.nix {
-    inherit python3Packages stdenv;
-  };
-  django-filer = pkgs.callPackage pkgs/development/python-modules/django-filer/default.nix {
-    inherit fetchFromGitHub python3Packages stdenv; # django-js-asset django-mptt
-  };
-  django-js-asset = pkgs.callPackage pkgs/development/python-modules/django-js-asset/default.nix {
-    inherit python3Packages stdenv;
-  };
-  django-modern-rpc = pkgs.callPackage pkgs/development/python-modules/django-modern-rpc/default.nix {
-    inherit python3Packages stdenv;
-  };
-  django-mptt = pkgs.callPackage pkgs/development/python-modules/django-mptt/default.nix {
-    inherit python3Packages stdenv django-js-asset;
-  };
-  django-related-select = pkgs.callPackage pkgs/development/python-modules/django-related-select/default.nix {
-    inherit python3Packages stdenv;
-  };
   dmenu-ng = pkgs.callPackage pkgs/applications/misc/dmenu-ng/default.nix {
     lib = mylib;
     inherit stdenv fetchurl libX11 libXinerama libXft zlib;
@@ -156,29 +96,13 @@ rec {
   dmenu-python-ng = pkgs.callPackage pkgs/development/python-modules/dmenu-python-ng/default.nix {
     inherit python3Packages stdenv dmenu-ng;
   };
-  drest = pkgs.callPackage pkgs/development/python-modules/drest/default.nix { inherit python3Packages stdenv; };
   fissix = pkgs.callPackage pkgs/development/python-modules/fissix/default.nix { lib = mylib; };
-  json-rpc = pkgs.callPackage pkgs/development/python-modules/json-rpc/default.nix { inherit python3Packages stdenv; };
-  jsonfield = pkgs.callPackage pkgs/development/python-modules/jsonfield/default.nix { inherit python3Packages stdenv; };
-  jsonrpcclient = pkgs.callPackage pkgs/development/python-modules/jsonrpcclient/default.nix {
-    inherit python3Packages stdenv apply-defaults click6;
-  };
   moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix { lib = mylib; volatile = volatile; };
-  python-social-auth = pkgs.callPackage pkgs/development/python-modules/python-social-auth/default.nix {
-    lib = mylib;
-    inherit python3Packages stdenv volatile social-auth-core;
-  };
 
   pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { lib = mylib; };
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
     lib = mylib;
     inherit dmenu-python-ng pyfzf;
-  };
-  social-auth-app-django = pkgs.callPackage pkgs/development/python-modules/social-auth-app-django/default.nix {
-    inherit python3Packages stdenv social-auth-core;
-  };
-  social-auth-core = pkgs.callPackage pkgs/development/python-modules/social-auth-app-django/default.nix {
-    inherit python3Packages stdenv;
   };
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { lib = mylib; };
   yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { lib = mylib; };
