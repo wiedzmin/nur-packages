@@ -20,6 +20,7 @@ rec {
   autoPatchelfHook = pkgs.autoPatchelfHook;
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
+  fd = pkgs.fd;
   fetchFromGitHub = pkgs.fetchFromGitHub;
   fetchgit = pkgs.fetchgit;
   fetchurl = pkgs.fetchurl;
@@ -34,6 +35,7 @@ rec {
   pcre = pkgs.pcre;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
+  rofi = pkgs.rofi;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
   xsel = pkgs.xsel;
@@ -55,7 +57,7 @@ rec {
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
 
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
-    inherit buildGoModule dmenu-ng fetchFromGitHub git lib makeWrapper networkmanager xsel;
+    inherit buildGoModule dmenu-ng fd fetchFromGitHub git lib makeWrapper networkmanager rofi xsel;
   };
 
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
