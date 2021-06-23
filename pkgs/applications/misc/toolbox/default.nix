@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "beccba8bfdd29369dd5cd0e839c4f0b190926fa3";
-    sha256 = "12rqgw98r1z5hx0r9wib9divl0pqq55x7spjxg7ksw5icp1ckg1y";
+    rev = "af4deeebd9faf6531de4c3d36ac898dc43cae3db";
+    sha256 = "0xg1i3583kcf84ryzg6h3yn1nb5bwd8li8k4l9ma2lskh0xhyqka";
   };
 
   vendorSha256 = "l9wpCKMurTEjwD954kMeV6FR7Qhe25i77ouXuxTneZw=";
@@ -21,7 +21,7 @@ buildGoModule {
     wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
     wrapProgram $out/bin/projects --prefix PATH : ${lib.makeBinPath [ rofi dmenu-ng fd ]}
     wrapProgram $out/bin/qbsessions --prefix PATH : ${lib.makeBinPath [ rofi dmenu-ng ]}
-    wrapProgram $out/bin/services --prefix PATH : ${lib.makeBinPath [ rofi tmux ]}
+    wrapProgram $out/bin/services --prefix PATH : ${lib.makeBinPath [ dmenu-ng rofi tmux ]}
     wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
     wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
   '';
