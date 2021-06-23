@@ -1,4 +1,4 @@
-{ buildGoModule, dmenu-ng, fd, fetchFromGitHub, git, lib, makeWrapper, networkmanager, rofi, xsel }:
+{ buildGoModule, dmenu-ng, fd, fetchFromGitHub, git, lib, makeWrapper, networkmanager, rofi, tmux, xsel }:
 
 buildGoModule {
   pname = "toolbox";
@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "ccfb43a5a463c96279ec42287f0e53216dcb9c55";
-    sha256 = "11lypw8yvzpq5gzkmnmkgydymxlg5nm6i1cdiz252py253m9janh";
+    rev = "beccba8bfdd29369dd5cd0e839c4f0b190926fa3";
+    sha256 = "12rqgw98r1z5hx0r9wib9divl0pqq55x7spjxg7ksw5icp1ckg1y";
   };
 
   vendorSha256 = "l9wpCKMurTEjwD954kMeV6FR7Qhe25i77ouXuxTneZw=";
@@ -21,7 +21,8 @@ buildGoModule {
     wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
     wrapProgram $out/bin/projects --prefix PATH : ${lib.makeBinPath [ rofi dmenu-ng fd ]}
     wrapProgram $out/bin/qbsessions --prefix PATH : ${lib.makeBinPath [ rofi dmenu-ng ]}
-    wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ xsel ]}
+    wrapProgram $out/bin/services --prefix PATH : ${lib.makeBinPath [ rofi tmux ]}
+    wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
     wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
   '';
 

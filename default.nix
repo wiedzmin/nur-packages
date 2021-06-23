@@ -36,6 +36,7 @@ rec {
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
   rofi = pkgs.rofi;
+  tmux = pkgs.tmux;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
   xsel = pkgs.xsel;
@@ -57,7 +58,7 @@ rec {
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
 
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
-    inherit buildGoModule dmenu-ng fd fetchFromGitHub git lib makeWrapper networkmanager rofi xsel;
+    inherit buildGoModule dmenu-ng fd fetchFromGitHub git lib makeWrapper networkmanager rofi tmux xsel;
   };
 
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
