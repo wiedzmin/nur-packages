@@ -39,6 +39,7 @@ rec {
   tmux = pkgs.tmux;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
+  xkb-switch = pkgs.xkb-switch;
   xsel = pkgs.xsel;
   zlib = pkgs.zlib;
 
@@ -57,6 +58,9 @@ rec {
   };
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
 
+  i3tools = pkgs.callPackage pkgs/applications/misc/i3tools/default.nix {
+    inherit buildGoModule fetchFromGitHub lib makeWrapper xkb-switch;
+  };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
     inherit buildGoModule dmenu-ng fd fetchFromGitHub git lib makeWrapper networkmanager rofi tmux xsel;
   };
