@@ -1,17 +1,17 @@
 { buildGoModule, fetchFromGitHub, lib, makeWrapper, xkb-switch }:
 
 buildGoModule {
-  pname = "i3tools";
+  pname = "wmtools";
   version = "unstable";
 
   src = fetchFromGitHub {
     owner = "wiedzmin";
-    repo = "i3tools";
-    rev = "9d40fbe8dc854194a206612053fc4848b9b4ac4e";
-    sha256 = "1xxzrk55lk03cnjnl4dwz53n4673asnlnd98cjg1l6jmcjm1rd98";
+    repo = "wmtools";
+    rev = "be00b29908345b3b4240ef4d8adc88efbc0909b6";
+    sha256 = "0v3p7x8kpbkf2qsi1l0k7k2j2agxj9fw593hi6ncjfqd785h9xld";
   };
 
-  vendorSha256 = "e57lbiimXVasnCLndQ70pZpIJXYI0y5OqpcnpmsOfeI=";
+  vendorSha256 = "REJ2PMk+FV9AXUtjEvOJyDQlelYP+i9X5YCsvQ4sO6Q=";
   # vendorSha256 = lib.fakeSha256; # because of active development
 
   nativeBuildInputs = [ makeWrapper ];
@@ -21,8 +21,8 @@ buildGoModule {
   '';
 
   meta = with lib; {
-    description = "Various helper tools for i3";
-    homepage = "https://github.com/wiedzmin/i3tools";
+    description = "Various helper tools for window managers";
+    homepage = "https://github.com/wiedzmin/wmtools";
     license = licenses.mit;
     maintainers = with maintainers; [ wiedzmin ];
     platforms = platforms.all;

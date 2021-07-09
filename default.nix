@@ -58,7 +58,7 @@ rec {
   };
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
 
-  i3tools = pkgs.callPackage pkgs/applications/misc/i3tools/default.nix {
+  wmtools = pkgs.callPackage pkgs/applications/misc/wmtools/default.nix {
     inherit buildGoModule fetchFromGitHub lib makeWrapper xkb-switch;
   };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
