@@ -28,6 +28,7 @@ rec {
   libX11 = pkgs.xorg.libX11;
   libXft = pkgs.xorg.libXft;
   libXinerama = pkgs.xorg.libXinerama;
+  luaPackages = pkgs.luaPackages;
   makeBinPath = pkgs.lib.makeBinPath;
   makeWrapper = pkgs.makeWrapper;
   networkmanager = pkgs.networkmanager;
@@ -114,6 +115,8 @@ rec {
   my_cookies = pkgs.callPackage pkgs/development/python-modules/my_cookies/default.nix {
     inherit lib openssl python3Packages;
   };
+
+  awesome-lain = pkgs.callPackage pkgs/development/lua-modules/awesome-lain/default.nix { inherit lib; };
 
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { inherit lib; });
 }
