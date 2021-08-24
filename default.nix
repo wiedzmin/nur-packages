@@ -118,6 +118,7 @@ rec {
 
   awesome-lain = pkgs.callPackage pkgs/development/lua-modules/awesome-lain/default.nix { inherit lib; };
   awesome-ezconfig = pkgs.callPackage pkgs/development/lua-modules/awesome-ezconfig/default.nix { inherit lib; };
+  awesome-hints = pkgs.callPackage pkgs/development/lua-modules/awesome-hints/default.nix { inherit lib; };
 
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { inherit lib; });
 }
