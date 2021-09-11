@@ -1,4 +1,4 @@
-{ buildGoModule, dmenu-ng, fd, fetchFromGitHub, git, lib, makeWrapper, networkmanager, rofi, tmux, xsel }:
+{ buildGoModule, fd, fetchFromGitHub, git, lib, makeWrapper, networkmanager, rofi, tmux, tmuxp, xkb-switch, xsel }:
 
 buildGoModule {
   pname = "toolbox";
@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "4b5e4d1ff62797892ebd5f337de7441ab7bbb094";
-    sha256 = "1dy3xlfl9kg8pdsmjqz0gzhxhi9bgipqmlv4j55zh6zr71771ird";
+    rev = "2a753d3299dace330d1a16af2604dd19f6f12590";
+    sha256 = "00z6rmv2m4r20k0q1pxam3y4xgrblzmrncspf74nwr0cyrdadscb";
   };
 
   vendorSha256 = "e4ZQc8Mrgx1V5syAqjbWmg6zEvNX555zywF6tzLgWHk=";
@@ -18,13 +18,13 @@ buildGoModule {
 
   postInstall = ''
     wrapProgram $out/bin/bookshelf --prefix PATH : ${lib.makeBinPath [ rofi ]}
-    wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
-    wrapProgram $out/bin/projects --prefix PATH : ${lib.makeBinPath [ rofi dmenu-ng fd ]}
-    wrapProgram $out/bin/qbsessions --prefix PATH : ${lib.makeBinPath [ rofi dmenu-ng ]}
-    wrapProgram $out/bin/services --prefix PATH : ${lib.makeBinPath [ dmenu-ng rofi tmux ]}
-    wrapProgram $out/bin/vpn --prefix PATH : ${lib.makeBinPath [ rofi dmenu-ng ]}
-    wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
-    wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ dmenu-ng xsel ]}
+    wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
+    wrapProgram $out/bin/projects --prefix PATH : ${lib.makeBinPath [ fd rofi xkb-switch ]}
+    wrapProgram $out/bin/qbsessions --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch ]}
+    wrapProgram $out/bin/services --prefix PATH : ${lib.makeBinPath [ rofi tmux xkb-switch ]}
+    wrapProgram $out/bin/tmuxctl --prefix PATH : ${lib.makeBinPath [ rofi tmuxp xkb-switch ]}
+    wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
+    wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
   '';
 
   meta = with lib; {

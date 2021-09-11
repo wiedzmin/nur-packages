@@ -38,6 +38,7 @@ rec {
   python3Packages = pkgs.python3Packages;
   rofi = pkgs.rofi;
   tmux = pkgs.tmux;
+  tmuxp = pkgs.tmuxp;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
   xkb-switch = pkgs.xkb-switch;
@@ -63,7 +64,7 @@ rec {
     inherit buildGoModule fetchFromGitHub lib makeWrapper xkb-switch;
   };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
-    inherit buildGoModule dmenu-ng fd fetchFromGitHub git lib makeWrapper networkmanager rofi tmux xsel;
+    inherit buildGoModule fd fetchFromGitHub git lib makeWrapper networkmanager rofi tmux tmuxp xkb-switch xsel;
   };
 
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {
