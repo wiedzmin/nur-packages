@@ -7,17 +7,17 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "wmtools";
-    rev = "be00b29908345b3b4240ef4d8adc88efbc0909b6";
-    sha256 = "0v3p7x8kpbkf2qsi1l0k7k2j2agxj9fw593hi6ncjfqd785h9xld";
+    rev = "ab17f2da8c70313c31cf340f6cae966955f09134";
+    sha256 = "1j2a823lcsjax314x7k7z1ya2mb4qh5yihsg693x2iqj0dfpz96m";
   };
 
-  vendorSha256 = "REJ2PMk+FV9AXUtjEvOJyDQlelYP+i9X5YCsvQ4sO6Q=";
+  vendorSha256 = "Bbwm0yqB2SamZewdSuAOFLcuhZiFgW2y0i2I6UlOStg=";
   # vendorSha256 = lib.fakeSha256; # because of active development
 
   nativeBuildInputs = [ makeWrapper ];
 
   postInstall = ''
-    wrapProgram $out/bin/kbd --prefix PATH : ${lib.makeBinPath [ xkb-switch ]}
+    wrapProgram $out/bin/i3-kbd --prefix PATH : ${lib.makeBinPath [ xkb-switch ]}
   '';
 
   meta = with lib; {
