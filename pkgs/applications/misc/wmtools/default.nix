@@ -1,4 +1,4 @@
-{ buildGoModule, fetchFromGitHub, lib, makeWrapper, xkb-switch }:
+{ buildGoModule, fetchFromGitHub, lib, makeWrapper, xdotool, xkb-switch }:
 
 buildGoModule {
   pname = "wmtools";
@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "wmtools";
-    rev = "ab17f2da8c70313c31cf340f6cae966955f09134";
-    sha256 = "1j2a823lcsjax314x7k7z1ya2mb4qh5yihsg693x2iqj0dfpz96m";
+    rev = "f8c43f8453891b00c1aff3793473b0911de39300";
+    sha256 = "0mc1hqai3k3qaa7ys7g7fv247699mmrar261fyazhkc6pf6rczv7";
   };
 
   vendorSha256 = "Bbwm0yqB2SamZewdSuAOFLcuhZiFgW2y0i2I6UlOStg=";
@@ -18,6 +18,7 @@ buildGoModule {
 
   postInstall = ''
     wrapProgram $out/bin/i3-kbd --prefix PATH : ${lib.makeBinPath [ xkb-switch ]}
+    wrapProgram $out/bin/i3-mousewarp --prefix PATH : ${lib.makeBinPath [ xdotool ]}
   '';
 
   meta = with lib; {

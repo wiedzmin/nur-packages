@@ -41,6 +41,7 @@ rec {
   tmuxp = pkgs.tmuxp;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
+  xdotool = pkgs.xdotool;
   xkb-switch = pkgs.xkb-switch;
   xsel = pkgs.xsel;
   zlib = pkgs.zlib;
@@ -61,7 +62,7 @@ rec {
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
 
   wmtools = pkgs.callPackage pkgs/applications/misc/wmtools/default.nix {
-    inherit buildGoModule fetchFromGitHub lib makeWrapper xkb-switch;
+    inherit buildGoModule fetchFromGitHub lib makeWrapper xdotool xkb-switch;
   };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
     inherit buildGoModule fd fetchFromGitHub git lib makeWrapper networkmanager rofi tmux tmuxp xkb-switch xsel;
