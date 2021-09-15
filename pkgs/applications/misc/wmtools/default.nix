@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "wmtools";
-    rev = "f8c43f8453891b00c1aff3793473b0911de39300";
-    sha256 = "0mc1hqai3k3qaa7ys7g7fv247699mmrar261fyazhkc6pf6rczv7";
+    rev = "fb3dfb5a0e675138f770c12f590afc23d7f3dbc0";
+    sha256 = "1fkmz0drd1qsm507qff00a63ckhg5a7fh53fn5jawfshgsjr5dxd";
   };
 
   vendorSha256 = "Bbwm0yqB2SamZewdSuAOFLcuhZiFgW2y0i2I6UlOStg=";
