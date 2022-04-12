@@ -7,11 +7,11 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "2a753d3299dace330d1a16af2604dd19f6f12590";
-    sha256 = "00z6rmv2m4r20k0q1pxam3y4xgrblzmrncspf74nwr0cyrdadscb";
+    rev = "47a9a09ed949b63dec73e2ff690ac25bf011db8a";
+    sha256 = "1asj0bhcjs4vlrdjpqmlp6g9mhl8nywkmihk3sy6xdkqsx49dzla";
   };
 
-  vendorSha256 = "e4ZQc8Mrgx1V5syAqjbWmg6zEvNX555zywF6tzLgWHk=";
+  vendorSha256 = "BJGhLIejzuenv7B8gtwicxlfKAxqeh0a1qk0kwwYaBA=";
   # vendorSha256 = lib.fakeSha256; # because of active development
 
   nativeBuildInputs = [ makeWrapper ];
