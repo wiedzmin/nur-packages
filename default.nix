@@ -18,6 +18,7 @@ rec {
   overlays = import ./overlays; # nixpkgs overlays
 
   autoPatchelfHook = pkgs.autoPatchelfHook;
+  appimageTools = pkgs.appimageTools;
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
   fd = pkgs.fd;
@@ -106,6 +107,9 @@ rec {
   moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix {
     inherit lib;
     volatile = volatile;
+  };
+  modulo = pkgs.callPackage pkgs/applications/misc/modulo/default.nix {
+    inherit appimageTools fetchurl lib;
   };
 
   pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { inherit lib; };
