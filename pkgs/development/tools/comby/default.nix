@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   pname = "comby";
-  version = "0.16.0";
+  version = "1.7.0";
 
   src = fetchurl {
     url = "https://github.com/comby-tools/comby/releases/download/${version}/comby-${version}-x86_64-linux.tar.gz";
-    sha256 = "13flbm1h44w8rkvq80sybv0hw2i9s5i2w21q310h6ywa5mf8dgnk";
+    sha256 = "01rh4m45gzzc79b56b6kp5yri0x04cgn44jr6l3c4clf00p09zzc";
   };
 
   # The tarball is just the prebuilt binary, in the archive root.
