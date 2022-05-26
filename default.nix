@@ -37,6 +37,7 @@ rec {
   pcre = pkgs.pcre;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
+  pyfzf = pkgs.pyfzf;
   rofi = pkgs.rofi;
   tmux = pkgs.tmux;
   tmuxp = pkgs.tmuxp;
@@ -112,7 +113,6 @@ rec {
     inherit appimageTools fetchurl lib;
   };
 
-  pyfzf = pkgs.callPackage pkgs/development/python-modules/pyfzf/default.nix { inherit lib; };
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
     inherit dmenu-python-ng lib pyfzf;
   };
