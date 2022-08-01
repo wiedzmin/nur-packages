@@ -40,7 +40,6 @@ rec {
   pkg-config = pkgs.pkg-config;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
-  pyfzf = pkgs.pyfzf;
   rofi = pkgs.rofi;
   tmux = pkgs.tmux;
   tmuxp = pkgs.tmuxp;
@@ -121,7 +120,7 @@ rec {
   };
 
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
-    inherit dmenu-python-ng lib pyfzf;
+    inherit dmenu-python-ng lib;
   };
   volatile = pkgs.callPackage pkgs/development/python-modules/volatile/default.nix { inherit lib; };
   yaspin = pkgs.callPackage pkgs/development/python-modules/yaspin/default.nix { inherit lib; };

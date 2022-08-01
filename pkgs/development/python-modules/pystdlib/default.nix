@@ -1,4 +1,4 @@
-{ dmenu-python-ng, fetchFromGitHub, lib, pyfzf, python3Packages }:
+{ dmenu-python-ng, fetchFromGitHub, lib, python3Packages }:
 
 python3Packages.buildPythonPackage rec {
   pname = "pystdlib";
