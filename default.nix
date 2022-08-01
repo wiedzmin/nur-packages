@@ -19,12 +19,14 @@ rec {
 
   autoPatchelfHook = pkgs.autoPatchelfHook;
   appimageTools = pkgs.appimageTools;
+  bison = pkgs.bison;
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
   fd = pkgs.fd;
   fetchFromGitHub = pkgs.fetchFromGitHub;
   fetchgit = pkgs.fetchgit;
   fetchurl = pkgs.fetchurl;
+  flex = pkgs.flex;
   git = pkgs.git;
   libX11 = pkgs.xorg.libX11;
   libXft = pkgs.xorg.libXft;
@@ -35,6 +37,7 @@ rec {
   networkmanager = pkgs.networkmanager;
   openssl = pkgs.openssl;
   pcre = pkgs.pcre;
+  pkg-config = pkgs.pkg-config;
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
   pyfzf = pkgs.pyfzf;
@@ -47,6 +50,10 @@ rec {
   xkb-switch = pkgs.xkb-switch;
   xsel = pkgs.xsel;
   zlib = pkgs.zlib;
+
+  cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
+    inherit bison fetchFromGitHub flex lib pkg-config stdenv;
+  };
 
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
     inherit buildGoPackage fetchgit lib;
