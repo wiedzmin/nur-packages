@@ -18,6 +18,7 @@ rec {
   overlays = import ./overlays; # nixpkgs overlays
 
   autoPatchelfHook = pkgs.autoPatchelfHook;
+  autoreconfHook = pkgs.autoreconfHook;
   appimageTools = pkgs.appimageTools;
   bison = pkgs.bison;
   buildGoModule = pkgs.buildGoModule;
@@ -35,6 +36,7 @@ rec {
   makeBinPath = pkgs.lib.makeBinPath;
   makeWrapper = pkgs.makeWrapper;
   networkmanager = pkgs.networkmanager;
+  nghttp2 = pkgs.nghttp2;
   openssl = pkgs.openssl;
   pcre = pkgs.pcre;
   pkg-config = pkgs.pkg-config;
@@ -52,6 +54,9 @@ rec {
 
   cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv;
+  };
+  clixon = pkgs.callPackage pkgs/development/libraries/clixon/default.nix {
+    inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
   };
 
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
