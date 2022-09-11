@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "eb16c7fba34a349490c2411df681e3ca97734c13";
-    sha256 = "11b31swzhs96bqbh6g4shpksn980asxyzgycr7q1vhfsdlxmc8zf";
+    rev = "6234cb62e6da4985a8bea80ce8c3505fd3375797";
+    sha256 = "072wzj4860salkdl8vi605pb4fwv2ivijpmrfc1p527n8w0jv25n";
   };
 
   vendorSha256 = "+/uvr/axULGBuc/Awk3BZxxCndQehbvIjmfwTg9bYhs=";
@@ -17,7 +17,6 @@ buildGoModule {
   nativeBuildInputs = [ makeWrapper ];
 
   postInstall = ''
-    wrapProgram $out/bin/bookshelf --prefix PATH : ${lib.makeBinPath [ rofi ]}
     wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
     wrapProgram $out/bin/projects --prefix PATH : ${lib.makeBinPath [ fd rofi xkb-switch ]}
     wrapProgram $out/bin/qbsessions --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch ]}
