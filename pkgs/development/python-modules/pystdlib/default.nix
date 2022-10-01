@@ -19,6 +19,6 @@ python3Packages.buildPythonPackage rec {
     description = "Opinionated python utilities collection";
     homepage = "https://github.com/wiedzmin/pystdlib";
     license = licenses.mit;
-    maintainer = with maintainers; [ wiedzmin ];
+    maintainers = with maintainers; [ wiedzmin ];
   };
 }
