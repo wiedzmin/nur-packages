@@ -23,6 +23,7 @@ rec {
   bison = pkgs.bison;
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
+  cmake = pkgs.cmake;
   fd = pkgs.fd;
   fetchFromGitHub = pkgs.fetchFromGitHub;
   fetchgit = pkgs.fetchgit;
@@ -53,6 +54,9 @@ rec {
   xsel = pkgs.xsel;
   zlib = pkgs.zlib;
 
+  cargs = pkgs.callPackage pkgs/development/libraries/cargs/default.nix {
+    inherit cmake fetchFromGitHub lib stdenv;
+  };
   cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv;
   };
