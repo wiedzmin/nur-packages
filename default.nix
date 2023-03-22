@@ -24,6 +24,7 @@ rec {
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
   cmake = pkgs.cmake;
+  extra-cmake-modules = pkgs.extra-cmake-modules;
   fd = pkgs.fd;
   fetchFromGitHub = pkgs.fetchFromGitHub;
   fetchgit = pkgs.fetchgit;
@@ -33,7 +34,10 @@ rec {
   jre = pkgs.jre;
   libX11 = pkgs.xorg.libX11;
   libXft = pkgs.xorg.libXft;
+  libXi = pkgs.xorg.libXi;
   libXinerama = pkgs.xorg.libXinerama;
+  libXtst = pkgs.xorg.libXtst;
+  libnotify = pkgs.libnotify;
   luaPackages = pkgs.luaPackages;
   makeBinPath = pkgs.lib.makeBinPath;
   makeWrapper = pkgs.makeWrapper;
@@ -47,8 +51,10 @@ rec {
   rofi = pkgs.rofi;
   tmux = pkgs.tmux;
   tmuxp = pkgs.tmuxp;
+  rustPlatform = pkgs.rustPlatform;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
+  xclip = pkgs.xclip;
   xdotool = pkgs.xdotool;
   xkb-switch = pkgs.xkb-switch;
   xsel = pkgs.xsel;
@@ -62,6 +68,11 @@ rec {
   };
   clixon = pkgs.callPackage pkgs/development/libraries/clixon/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
+  };
+
+  espanso = pkgs.callPackage pkgs/applications/misc/espanso/default.nix {
+    inherit lib fetchFromGitHub rustPlatform pkg-config extra-cmake-modules libX11 libXi libXtst libnotify xclip xdotool makeWrapper stdenv;
+    openssl = pkgs.openssl_1_1;
   };
 
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
