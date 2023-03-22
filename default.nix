@@ -24,6 +24,7 @@ rec {
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
   cmake = pkgs.cmake;
+  dbus = pkgs.dbus;
   extra-cmake-modules = pkgs.extra-cmake-modules;
   fd = pkgs.fd;
   fetchFromGitHub = pkgs.fetchFromGitHub;
@@ -37,6 +38,7 @@ rec {
   libXi = pkgs.xorg.libXi;
   libXinerama = pkgs.xorg.libXinerama;
   libXtst = pkgs.xorg.libXtst;
+  libxkbcommon = pkgs.libxkbcommon;
   libnotify = pkgs.libnotify;
   luaPackages = pkgs.luaPackages;
   makeBinPath = pkgs.lib.makeBinPath;
@@ -54,6 +56,7 @@ rec {
   rustPlatform = pkgs.rustPlatform;
   sqlite = pkgs.sqlite;
   stdenv = pkgs.stdenv;
+  wxGTK31 = pkgs.wxGTK31;
   xclip = pkgs.xclip;
   xdotool = pkgs.xdotool;
   xkb-switch = pkgs.xkb-switch;
@@ -71,7 +74,7 @@ rec {
   };
 
   espanso = pkgs.callPackage pkgs/applications/misc/espanso/default.nix {
-    inherit lib fetchFromGitHub rustPlatform pkg-config extra-cmake-modules libX11 libXi libXtst libnotify xclip xdotool makeWrapper stdenv;
+    inherit lib fetchFromGitHub rustPlatform pkg-config extra-cmake-modules dbus libX11 libXi libXtst libnotify xclip xdotool makeWrapper libxkbcommon wxGTK31;
     openssl = pkgs.openssl_1_1;
   };
 

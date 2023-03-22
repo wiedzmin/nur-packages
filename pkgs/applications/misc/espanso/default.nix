@@ -3,6 +3,7 @@
 , rustPlatform
 , pkg-config
 , extra-cmake-modules
+, dbus
 , libX11
 , libXi
 , libXtst
@@ -11,21 +12,23 @@
 , xclip
 , xdotool
 , makeWrapper
-, stdenv
+, libxkbcommon
+, wxGTK31
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "espanso";
-  version = "0.7.3";
+  version = "2.1.8";
 
   src = fetchFromGitHub {
-    owner = "federico-terzi";
+    owner = "espanso";
     repo = pname;
     rev = "v${version}";
-    sha256 = "1q47r43midkq9574gl8gdv3ylvrnbhdc39rrw4y4yk6jbdf5wwkm";
+    sha256 = "06wzrjdvssixgd9rnrv4cscbfiyvp5pjpnrih48r0ral3pj2hdg5";
   };
 
-  cargoSha256 = "0ba5skn5s6qh0blf6bvivzvqc2l8v488l9n3x98pmf6nygrikfdb";
+  cargoSha256 = "sha256-U2ccF7DM16TtX3Kc4w4iNV4WsswHJ0FpO3+sWCL1Li8=";
+  # cargoSha256 = lib.fakeSha256;
 
   nativeBuildInputs = [
     extra-cmake-modules
@@ -34,18 +37,24 @@ rustPlatform.buildRustPackage rec {
   ];
 
   buildInputs = [
+    dbus
+    libxkbcommon
+    wxGTK31
     libX11
     libXtst
     libXi
     libnotify
     xclip
     openssl
-  ] ++ lib.optionals stdenv.isLinux [
     xdotool
   ];
 
   # Some tests require networking
   doCheck = false;
+
+  preBuild = ''
+    export PATH="${wxGTK31}/bin:$PATH"
+  '';
 
   postInstall = ''
     wrapProgram $out/bin/espanso \
