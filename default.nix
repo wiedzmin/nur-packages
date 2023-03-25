@@ -19,7 +19,6 @@ rec {
 
   autoPatchelfHook = pkgs.autoPatchelfHook;
   autoreconfHook = pkgs.autoreconfHook;
-  appimageTools = pkgs.appimageTools;
   bison = pkgs.bison;
   buildGoModule = pkgs.buildGoModule;
   buildGoPackage = pkgs.buildGoPackage;
@@ -141,9 +140,6 @@ rec {
   moreorless = pkgs.callPackage pkgs/development/python-modules/moreorless/default.nix {
     inherit lib;
     volatile = volatile;
-  };
-  modulo = pkgs.callPackage pkgs/applications/misc/modulo/default.nix {
-    inherit appimageTools fetchurl lib;
   };
 
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
