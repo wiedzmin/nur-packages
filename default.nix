@@ -72,11 +72,6 @@ rec {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
   };
 
-  espanso = pkgs.callPackage pkgs/applications/misc/espanso/default.nix {
-    inherit lib fetchFromGitHub rustPlatform pkg-config extra-cmake-modules dbus libX11 libXi libXtst libnotify xclip xdotool makeWrapper libxkbcommon wxGTK31;
-    openssl = pkgs.openssl_1_1;
-  };
-
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
     inherit buildGoPackage fetchgit lib;
   };
