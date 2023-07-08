@@ -71,6 +71,9 @@ rec {
   clixon = pkgs.callPackage pkgs/development/libraries/clixon/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
   };
+  cwalk = pkgs.callPackage pkgs/development/libraries/cwalk/default.nix {
+    inherit cmake fetchFromGitHub lib stdenv;
+  };
 
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
     inherit buildGoPackage fetchgit lib;
