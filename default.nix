@@ -50,6 +50,7 @@ rec {
   pkgconfig = pkgs.pkgconfig;
   python3Packages = pkgs.python3Packages;
   rofi = pkgs.rofi;
+  systemd = pkgs.systemd;
   tmux = pkgs.tmux;
   tmuxp = pkgs.tmuxp;
   rustPlatform = pkgs.rustPlatform;
@@ -97,7 +98,7 @@ rec {
     inherit buildGoModule fetchFromGitHub lib makeWrapper xdotool xkb-switch;
   };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
-    inherit buildGoModule fd fetchFromGitHub git lib makeWrapper networkmanager rofi tmux tmuxp xkb-switch xsel;
+    inherit buildGoModule fd fetchFromGitHub git lib makeWrapper networkmanager rofi systemd tmux tmuxp xkb-switch xsel;
   };
 
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {

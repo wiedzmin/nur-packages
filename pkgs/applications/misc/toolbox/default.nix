@@ -1,4 +1,4 @@
-{ buildGoModule, fd, fetchFromGitHub, git, lib, makeWrapper, networkmanager, rofi, tmux, tmuxp, xkb-switch, xsel }:
+{ buildGoModule, fd, fetchFromGitHub, git, lib, makeWrapper, networkmanager, rofi, systemd, tmux, tmuxp, xkb-switch, xsel }:
 
 buildGoModule {
   pname = "toolbox";
@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "ccfd720dedfa72960cb72cc067963264896e4d85";
-    sha256 = "1ny7jy67jlxp2xgn6a3c66mnxq2v4xrdmwj24gisgx51jbv5paih";
+    rev = "053cac0954103f9c9544dd1c3df0979d1afd1b18";
+    sha256 = "0mrymi5jdnhraa0n8dhbl9nzhfvmf8vzq4g67nip3z07wzars7f0";
   };
 
   vendorSha256 = "+/uvr/axULGBuc/Awk3BZxxCndQehbvIjmfwTg9bYhs=";
@@ -20,7 +20,7 @@ buildGoModule {
     wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
     wrapProgram $out/bin/projects --prefix PATH : ${lib.makeBinPath [ fd rofi xkb-switch ]}
     wrapProgram $out/bin/qbsessions --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch ]}
-    wrapProgram $out/bin/services --prefix PATH : ${lib.makeBinPath [ rofi tmux xkb-switch ]}
+    wrapProgram $out/bin/services --prefix PATH : ${lib.makeBinPath [ rofi systemd tmux xkb-switch ]}
     wrapProgram $out/bin/tmuxctl --prefix PATH : ${lib.makeBinPath [ rofi tmuxp xkb-switch ]}
     wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
     wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
