@@ -31,7 +31,6 @@ rec {
   fetchurl = pkgs.fetchurl;
   flex = pkgs.flex;
   git = pkgs.git;
-  jre = pkgs.jre;
   libX11 = pkgs.xorg.libX11;
   libXft = pkgs.xorg.libXft;
   libXi = pkgs.xorg.libXi;
@@ -88,9 +87,6 @@ rec {
 
   comby = pkgs.callPackage pkgs/development/tools/comby/default.nix {
     inherit autoPatchelfHook fetchurl lib pcre pkgconfig sqlite stdenv zlib;
-  };
-  code-maat = pkgs.callPackage pkgs/development/tools/code-maat/default.nix {
-    inherit lib stdenv fetchurl makeWrapper jre;
   };
   redis-tui = pkgs.callPackage pkgs/development/tools/redis-tui/default.nix { inherit lib; };
 
