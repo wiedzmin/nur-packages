@@ -151,4 +151,8 @@ rec {
   awesome-hints = pkgs.callPackage pkgs/development/lua-modules/awesome-hints/default.nix { inherit lib; };
 
   firefox-addons = pkgs.recurseIntoAttrs (pkgs.callPackage ./pkgs/firefox-addons { inherit lib; });
+
+  xremap = pkgs.callPackage pkgs/applications/misc/xremap/default.nix {
+    inherit fetchFromGitHub rustPlatform;
+  };
 }
