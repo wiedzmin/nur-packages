@@ -8,14 +8,14 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "cligen";
-  version = "6.5.0";
+  name = "cligen";
+  version = "5.8.0";
 
   src = fetchFromGitHub {
     "owner" = "clicon";
-    "repo" = pname;
-    "rev" = version;
-    "sha256" = "1jifgng74xsbrq2h0g8wgmzzkdpikz7v14ali842zbxs36iy65qi";
+    "repo" = "cligen";
+    "rev" = "a81bb0df55b30885720bab140de7ec3d2250cc23";
+    "sha256" = "000qmdzzxxc970clazw0iy813n8qj6kckgs5vx251kb4lf93vnx5";
   };
 
   nativeBuildInputs = [ flex bison pkg-config ];
