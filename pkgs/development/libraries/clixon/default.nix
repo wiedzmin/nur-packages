@@ -1,14 +1,14 @@
 { fetchFromGitHub, stdenv, flex, bison, pkg-config, lib, cligen, openssl, nghttp2, autoreconfHook }:
 
 stdenv.mkDerivation rec {
-  name = "clixon";
+  pname = "clixon";
   version = "6.5.0";
 
   src = fetchFromGitHub {
     "owner" = "clicon";
-    "repo" = "clixon";
-    "rev" = "a1badc312eafdf0300558eaed46905406bf336fa";
-    "sha256" = "1j5s1b32klh0glpj9x2z7xfxns46x9vgsm9d7sr17q1ykskdqpzc";
+    "repo" = pname;
+    "rev" = version;
+    "sha256" = "12i926rri52plwbyv8ga5b74m3ndkxbhhy85v9xmz6rvajkq8zwz";
   };
 
   # nativeBuildInputs = [ autoreconfHook pkg-config bison flex ];
