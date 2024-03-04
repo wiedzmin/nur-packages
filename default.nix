@@ -38,6 +38,7 @@ rec {
   libXtst = pkgs.xorg.libXtst;
   libxkbcommon = pkgs.libxkbcommon;
   libnotify = pkgs.libnotify;
+  libtool = pkgs.libtool;
   luaPackages = pkgs.luaPackages;
   makeBinPath = pkgs.lib.makeBinPath;
   makeWrapper = pkgs.makeWrapper;
@@ -75,7 +76,7 @@ rec {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
   };
   clixon = pkgs.callPackage pkgs/development/libraries/clixon/default.nix {
-    inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
+    inherit autoreconfHook bison cligen fetchFromGitHub flex lib libtool nghttp2 openssl pkg-config stdenv;
   };
   cwalk = pkgs.callPackage pkgs/development/libraries/cwalk/default.nix {
     inherit cmake fetchFromGitHub lib stdenv;

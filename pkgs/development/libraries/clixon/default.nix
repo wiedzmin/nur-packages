@@ -1,4 +1,16 @@
-{ fetchFromGitHub, stdenv, flex, bison, pkg-config, lib, cligen, openssl, nghttp2, autoreconfHook }:
+{
+  autoreconfHook,
+  bison,
+  cligen,
+  fetchFromGitHub,
+  flex,
+  lib,
+  libtool,
+  nghttp2,
+  openssl,
+  pkg-config,
+  stdenv
+}:
 
 stdenv.mkDerivation rec {
   pname = "clixon";
@@ -11,27 +23,25 @@ stdenv.mkDerivation rec {
     "sha256" = "12i926rri52plwbyv8ga5b74m3ndkxbhhy85v9xmz6rvajkq8zwz";
   };
 
-  # nativeBuildInputs = [ autoreconfHook pkg-config bison flex ];
+  nativeBuildInputs = [
+    autoreconfHook
+    libtool
+    pkg-config
+  ];
 
   buildInputs = [
-    autoreconfHook
     bison
     cligen
     flex
     nghttp2
     openssl
-    pkg-config
   ];
 
-  outputs = [ "out" "dev" ];
-
-  # configureFlags = [
-  #   "--exec-prefix=${placeholder "out"}"
-  # ];
+  preConfigure = ''
+    libtoolize --force
+  '';
 
   makeFlags = [ "DESTDIR=$(out)" ];
-
-  # installFlags = [ "DESTDIR=${placeholder "out"}" ];
 
   meta = with lib; {
     homepage = "https://www.clicon.org/";
