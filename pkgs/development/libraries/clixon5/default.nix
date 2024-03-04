@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   name = "clixon";
-  version = "6.5.0";
+  version = "5.8.0";
 
   src = fetchFromGitHub {
     "owner" = "clicon";
     "repo" = "clixon";
-    "rev" = "a1badc312eafdf0300558eaed46905406bf336fa";
-    "sha256" = "1j5s1b32klh0glpj9x2z7xfxns46x9vgsm9d7sr17q1ykskdqpzc";
+    "rev" = "3a9b276debdd7217e0fb4246245772a1e8bb3c71";
+    "sha256" = "108jk730n5c8rlc22scaqslrg7qajzp5g292p8ljr7nsn7w6fkka";
   };
 
   # nativeBuildInputs = [ autoreconfHook pkg-config bison flex ];

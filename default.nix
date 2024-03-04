@@ -68,6 +68,9 @@ rec {
   cligen = pkgs.callPackage pkgs/development/libraries/cligen/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv;
   };
+  clixon5 = pkgs.callPackage pkgs/development/libraries/clixon5/default.nix {
+    inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
+  };
   clixon = pkgs.callPackage pkgs/development/libraries/clixon/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
   };
