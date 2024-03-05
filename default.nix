@@ -18,6 +18,8 @@ rec {
   overlays = import ./overlays; # nixpkgs overlays
 
   autoPatchelfHook = pkgs.autoPatchelfHook;
+  autoconf = pkgs.autoconf;
+  automake = pkgs.automake;
   autoreconfHook = pkgs.autoreconfHook;
   bison = pkgs.bison;
   buildGoModule = pkgs.buildGoModule;
@@ -72,11 +74,11 @@ rec {
   cligen5 = pkgs.callPackage pkgs/development/libraries/cligen5/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv;
   };
+  clixon = pkgs.callPackage pkgs/development/libraries/clixon/default.nix {
+    inherit autoconf automake autoreconfHook bison cligen fetchFromGitHub flex lib libtool nghttp2 openssl pkg-config stdenv;
+  };
   clixon5 = pkgs.callPackage pkgs/development/libraries/clixon5/default.nix {
     inherit bison fetchFromGitHub flex lib pkg-config stdenv cligen openssl nghttp2 autoreconfHook;
-  };
-  clixon = pkgs.callPackage pkgs/development/libraries/clixon/default.nix {
-    inherit autoreconfHook bison cligen fetchFromGitHub flex lib libtool nghttp2 openssl pkg-config stdenv;
   };
   cwalk = pkgs.callPackage pkgs/development/libraries/cwalk/default.nix {
     inherit cmake fetchFromGitHub lib stdenv;
