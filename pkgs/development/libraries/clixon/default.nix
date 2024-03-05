@@ -1,4 +1,6 @@
 {
+  autoconf,
+  automake,
   autoreconfHook,
   bison,
   cligen,
@@ -24,24 +26,46 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    autoreconfHook
+    # autoreconfHook
+    # autoconf
+    # automake
     libtool
     pkg-config
+    bison
+    flex
   ];
 
   buildInputs = [
-    bison
     cligen
-    flex
     nghttp2
     openssl
   ];
 
   preConfigure = ''
     libtoolize --force
+  #   autoconf
+  #   aclocal
+  #   # autoheader
+  #   # automake --force-missing --add-missing
   '';
 
-  makeFlags = [ "DESTDIR=$(out)" ];
+
+  makeFlags = [ "PREFIX=$(out)" ];
+  # makeFlags = [ "DESTDIR=$(out)" "INSTALLROOT=$(out)" ];
+
+  outputs = [ "out" "dev" ];
+
+  # configureFlags = [
+  #   "--exec-prefix=${placeholder "out"}"
+  # ];
+
+  installFlags = [ "DESTDIR=${placeholder "out"}" ];
+
+  postInstall = ''
+    moveToOutput $out/include $dev
+    moveToOutput $out/lib/clixon/clixon.h $dev
+    # moveToOutput $out/lib/cmake $dev
+  '';
 
   meta = with lib; {
     homepage = "https://www.clicon.org/";
