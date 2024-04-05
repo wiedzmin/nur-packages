@@ -11,8 +11,8 @@ buildGoModule {
     sha256 = "1fkmz0drd1qsm507qff00a63ckhg5a7fh53fn5jawfshgsjr5dxd";
   };
 
-  vendorSha256 = "Bbwm0yqB2SamZewdSuAOFLcuhZiFgW2y0i2I6UlOStg=";
-  # vendorSha256 = lib.fakeSha256; # because of active development
+  vendorHash = "sha256-Bbwm0yqB2SamZewdSuAOFLcuhZiFgW2y0i2I6UlOStg=";
+  # vendorHash = lib.fakeSha256; # because of active development
 
   nativeBuildInputs = [ makeWrapper ];
 
