@@ -16,4 +16,6 @@ rustPlatform.buildRustPackage rec {
 
   buildFeatures = [ "x11" ]; # FIXME: elaborate some features setting logic
   cargoSha256 = "sha256-2a66jPpb/fdI4EBMUgYW3NTlQGKlsOAUYvZendHK9+o=";
+
+  meta.mainProgram = "xremap";
 }
