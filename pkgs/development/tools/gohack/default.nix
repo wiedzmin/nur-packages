@@ -19,5 +19,6 @@ buildGoModule rec {
     license = licenses.bsd3;
     platforms = platforms.unix;
     maintainers = with maintainers; [ wiedzmin ];
+    broken = true;
   };
 }
