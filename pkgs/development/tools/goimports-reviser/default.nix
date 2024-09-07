@@ -3,16 +3,16 @@
 
 buildGoModule rec {
   name = "goimports-reviser-unstable-${version}";
-  version = "2021-01-04";
-  rev = "f8572aed2946e10878a167c8250600646e3c7601";
+  version = "2024-05-23";
+  rev = "5f29621b9217398814dbf41a021f51536cb54be1";
 
   src = fetchgit {
     inherit rev;
     url = "https://github.com/incu6us/goimports-reviser";
-    sha256 = "1nkrvslhsj3rsnjw4j8g1l78pkrpndmymf22ggq7lwkr4jrypxa9";
+    sha256 = "0dycpbz8cz6264k7vpz5m4qyj50b2llni8bqvm8q5ah6bc1kmaz3";
   };
 
-  vendorHash = "sha256-NwiGYnRKyucfpIqwWsjbHvGyTpRE6eCJ7o0TN+1vNKw=";
+  vendorHash = "sha256-z+FeAXPXKi653im2X2WOP1R9gRl/x7UBnndoEXoxdwA=";
 
   meta = with lib; {
     description = "Right imports sorting & code formatting tool (goimports alternative)";
@@ -20,6 +20,6 @@ buildGoModule rec {
     license = licenses.mit;
     platforms = platforms.unix;
     maintainers = with maintainers; [ wiedzmin ];
-    # broken = true;
+    broken = true;
   };
 }
