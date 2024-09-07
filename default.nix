@@ -21,7 +21,6 @@ rec {
   autoreconfHook = pkgs.autoreconfHook;
   bison = pkgs.bison;
   buildGoModule = pkgs.buildGoModule;
-  buildGoPackage = pkgs.buildGoPackage;
   cmake = pkgs.cmake;
   dbus = pkgs.dbus;
   extra-cmake-modules = pkgs.extra-cmake-modules;
@@ -83,13 +82,13 @@ rec {
   };
 
   gohack = pkgs.callPackage pkgs/development/tools/gohack/default.nix {
-    inherit buildGoPackage fetchgit lib;
+    inherit buildGoModule fetchgit lib;
   };
   goimports-reviser = pkgs.callPackage pkgs/development/tools/goimports-reviser/default.nix {
-    inherit buildGoPackage fetchgit lib;
+    inherit buildGoModule fetchgit lib;
   };
   go-mod-outdated = pkgs.callPackage pkgs/development/tools/go-mod-outdated/default.nix {
-    inherit buildGoPackage fetchgit lib; # FIXME: do we need anything except `lib` here?
+    inherit buildGoModule fetchgit lib; # FIXME: do we need anything except `lib` here?
   };
 
   comby = pkgs.callPackage pkgs/development/tools/comby/default.nix {
