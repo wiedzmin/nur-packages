@@ -16,6 +16,7 @@ buildGoModule {
 
   nativeBuildInputs = [ makeWrapper ];
 
+  # TODO: review wrappers
   postInstall = ''
     wrapProgram $out/bin/links --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
     wrapProgram $out/bin/projects --prefix PATH : ${lib.makeBinPath [ fd rofi xkb-switch ]}
