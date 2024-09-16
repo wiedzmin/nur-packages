@@ -41,6 +41,7 @@ rec {
   luaPackages = pkgs.luaPackages;
   makeBinPath = pkgs.lib.makeBinPath;
   makeWrapper = pkgs.makeWrapper;
+  mc = pkgs.mc;
   networkmanager = pkgs.networkmanager;
   nghttp2 = pkgs.nghttp2;
   openssl = pkgs.openssl;
@@ -60,6 +61,7 @@ rec {
   xdotool = pkgs.xdotool;
   xkb-switch = pkgs.xkb-switch;
   xsel = pkgs.xsel;
+  yad = pkgs.yad;
   zlib = pkgs.zlib;
 
   cargs = pkgs.callPackage pkgs/development/libraries/cargs/default.nix {
@@ -100,7 +102,7 @@ rec {
     inherit buildGoModule fetchFromGitHub lib makeWrapper xdotool xkb-switch;
   };
   toolbox = pkgs.callPackage pkgs/applications/misc/toolbox/default.nix {
-    inherit buildGoModule fd fetchFromGitHub git lib makeWrapper networkmanager rofi systemd tmux tmuxp xkb-switch xsel;
+    inherit buildGoModule fd fetchFromGitHub git lib makeWrapper mc networkmanager rofi systemd tmux tmuxp xkb-switch xsel yad;
   };
 
   bowler = pkgs.callPackage pkgs/development/python-modules/bowler/default.nix {

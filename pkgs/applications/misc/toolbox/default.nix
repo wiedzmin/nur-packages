@@ -1,4 +1,4 @@
-{ buildGoModule, fd, fetchFromGitHub, git, lib, makeWrapper, networkmanager, rofi, systemd, tmux, tmuxp, xkb-switch, xsel }:
+{ buildGoModule, fd, fetchFromGitHub, git, lib, makeWrapper, mc, networkmanager, rofi, systemd, tmux, tmuxp, xkb-switch, xsel, yad }:
 
 buildGoModule {
   pname = "toolbox";
@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "ca430b2e914b9fdb002282f974e66b3691b4377d";
-    sha256 = "1vd443d1dvp7spvvfalkyq7zvimx025w71ckq5n62wv13s19j8cd";
+    rev = "bbd2d95892bc539ba89619fdcff3804723c993be";
+    sha256 = "03r9afy12d985s1x0fz39w2h6lyx6zi8cll61a63nw5y5g3aszx2";
   };
 
   vendorHash = "sha256-+/uvr/axULGBuc/Awk3BZxxCndQehbvIjmfwTg9bYhs=";
@@ -25,6 +25,8 @@ buildGoModule {
     wrapProgram $out/bin/tmuxctl --prefix PATH : ${lib.makeBinPath [ rofi tmuxp xkb-switch ]}
     wrapProgram $out/bin/webjumps --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
     wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
+    wrapProgram $out/bin/wmkb --prefix PATH : ${lib.makeBinPath [ yad ]}
+    wrapProgram $out/bin/mcpanes --prefix PATH : ${lib.makeBinPath [ mc ]}
   '';
 
   meta = with lib; {
