@@ -5,7 +5,7 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "xremap";
-  version = "v0.10.0";
+  version = "v0.10.1";
 
   src = fetchFromGitHub {
     owner = "k0kubun";
@@ -15,7 +15,7 @@ rustPlatform.buildRustPackage rec {
   };
 
   buildFeatures = [ "x11" ]; # FIXME: elaborate some features setting logic
-  cargoHash = "sha256-2a66jPpb/fdI4EBMUgYW3NTlQGKlsOAUYvZendHK9+o=";
+  cargoHash = "sha256-G9hQMAjCSoSPuLboH3OxxvsJlDqZ+7t/beQXcDCp1FQ=";
 
   meta.mainProgram = "xremap";
 }
