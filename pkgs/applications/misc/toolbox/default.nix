@@ -7,8 +7,8 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "wiedzmin";
     repo = "toolbox";
-    rev = "bbd2d95892bc539ba89619fdcff3804723c993be";
-    sha256 = "03r9afy12d985s1x0fz39w2h6lyx6zi8cll61a63nw5y5g3aszx2";
+    rev = "bdeecb686d36efc52652afb126ade66ebae1ab33";
+    sha256 = "0lf8mxxxpwdq5bwp82hcm2mflcp3lydcyj2byqq22pnl432al44n";
   };
 
   vendorHash = "sha256-+/uvr/axULGBuc/Awk3BZxxCndQehbvIjmfwTg9bYhs=";
