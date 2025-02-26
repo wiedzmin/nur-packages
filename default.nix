@@ -163,4 +163,11 @@ rec {
   xremap = pkgs.callPackage pkgs/applications/misc/xremap/default.nix {
     inherit fetchFromGitHub rustPlatform;
   };
+
+  rargs = pkgs.callPackage pkgs/applications/misc/rargs/default.nix {
+    inherit lib fetchFromGitHub rustPlatform;
+  };
+  uq = pkgs.callPackage pkgs/applications/misc/uq/default.nix {
+    inherit lib fetchFromGitHub rustPlatform;
+  };
 }
