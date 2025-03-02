@@ -164,6 +164,9 @@ rec {
     inherit fetchFromGitHub rustPlatform;
   };
 
+  groupby = pkgs.callPackage pkgs/applications/misc/groupby/default.nix {
+    inherit lib fetchFromGitHub rustPlatform;
+  };
   rargs = pkgs.callPackage pkgs/applications/misc/rargs/default.nix {
     inherit lib fetchFromGitHub rustPlatform;
   };
