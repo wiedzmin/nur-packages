@@ -3,6 +3,7 @@
 python3Packages.buildPythonPackage rec {
   pname = "dmenu-python-ng";
   version = "0.2.1";
+  format = "setuptools";
 
   src = python3Packages.fetchPypi {
     inherit version;
