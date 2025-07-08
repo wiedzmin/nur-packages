@@ -3,6 +3,7 @@
 python3Packages.buildPythonPackage rec {
   pname = "pystdlib";
   version = "0.9";
+  format = "setuptools";
 
   src = fetchFromGitHub {
     owner = "wiedzmin";
