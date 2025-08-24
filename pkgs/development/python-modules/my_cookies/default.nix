@@ -3,6 +3,7 @@
 python3Packages.buildPythonPackage rec {
   pname = "my_cookies";
   version = "0.1.1";
+  format = "setuptools";
 
   src = python3Packages.fetchPypi {
     inherit pname version;
