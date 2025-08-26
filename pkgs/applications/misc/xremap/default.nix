@@ -5,10 +5,10 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "xremap";
-  version = "v0.10.11";
+  version = "v0.10.15";
 
   src = fetchFromGitHub {
-    owner = "k0kubun";
+    owner = "xremap";
     repo = "xremap";
     rev = version;
     sha256 = "sha256-6w3sLuGay+WPtQ1MtddvECtwh0U7EQUCDDQxkzYRe5o=";
