@@ -27,6 +27,7 @@ buildGoModule {
     wrapProgram $out/bin/websearch --prefix PATH : ${lib.makeBinPath [ rofi xkb-switch xsel ]}
     wrapProgram $out/bin/wmkb --prefix PATH : ${lib.makeBinPath [ yad ]}
     wrapProgram $out/bin/mcpanes --prefix PATH : ${lib.makeBinPath [ mc ]}
+    wrapProgram $out/bin/qbcli --prefix PATH : ${lib.makeBinPath [ xkb-switch ]}
   '';
 
   meta = with lib; {
