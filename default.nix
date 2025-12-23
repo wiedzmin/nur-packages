@@ -145,6 +145,10 @@ rec {
     volatile = volatile;
   };
 
+  keyszer = pkgs.callPackage pkgs/tools/X11/keyszer/default.nix {
+    inherit lib python3Packages fetchFromGitHub;
+  };
+
   pystdlib = pkgs.callPackage pkgs/development/python-modules/pystdlib/default.nix {
     inherit dmenu-python-ng lib;
   };
