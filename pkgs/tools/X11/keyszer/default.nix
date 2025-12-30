@@ -1,4 +1,4 @@
-{ lib, python3Packages, fetchFromGitHub }:
+{ lib, python3Packages, fetchFromGitHub, patches ? [ ./replace-inputdevice.fn-with-inputdevice.path.patch ] }:
 
 python3Packages.buildPythonApplication rec {
   pname = "keyszer";
@@ -12,6 +12,8 @@ python3Packages.buildPythonApplication rec {
     rev = "485026c773383d3d7d84373e351985c39cc7aa2e";
     hash = "sha256-cvJH2k5HfLlW2zcAxfmtllIM1YMSIXyxBEKaYSa7/5A=";
   };
+
+  inherit patches;
 
   build-system = [
     python3Packages.setuptools
