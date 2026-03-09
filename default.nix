@@ -30,10 +30,10 @@ rec {
   fetchurl = pkgs.fetchurl;
   flex = pkgs.flex;
   git = pkgs.git;
-  libX11 = pkgs.xorg.libX11;
-  libXft = pkgs.xorg.libXft;
+  libX11 = pkgs.libx11;
+  libXft = pkgs.libxft;
   libXi = pkgs.xorg.libXi;
-  libXinerama = pkgs.xorg.libXinerama;
+  libXinerama = pkgs.libxinerama;
   libXtst = pkgs.xorg.libXtst;
   libxkbcommon = pkgs.libxkbcommon;
   libnotify = pkgs.libnotify;
